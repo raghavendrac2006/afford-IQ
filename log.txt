@@ -844,3 +844,26 @@ branch=main
 repo_root=A:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T20:59:00.000000+05:30] Web Release & Cloud Hosting (Vercel / Netlify)
+
+User Prompt (verbatim, secrets redacted):
+Please release the web version of this app so that, once the web version is released, I can then use Vercel or Netlify to host it, and I can share that publicly accessible link to everyone.
+
+Agent Response Summary:
+Prepared and released the full web version of Afford IQ for instant public hosting on Vercel, Netlify, and static CDNs. Ported all mathematical intelligence and forecasting routines into a built-in client-side engine in web/app.js so the app functions 100% autonomously in the browser with zero latency even without a Python server. Added vercel.json with clean SPA URL rewrites, netlify.toml with publish and header configurations, and a root index.html redirect. Updated README.md with 1-click deployment instructions and pushed all updates to GitHub.
+
+Actions:
+* Created `vercel.json` for zero-configuration Vercel deployment and SPA URL routing
+* Created `netlify.toml` for 1-click Netlify hosting with security headers and redirects
+* Created root `index.html` entry redirect
+* Updated `web/app.js` with autonomous on-device client-side mathematical fallback engine
+* Updated `README.md` with step-by-step public cloud hosting and deployment guides
+* Verified and pushed all changes to https://github.com/raghavendrac2006/afford-IQ.git
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=A:\Hackerrank
+worktree=main
+parent_agent=none

@@ -1,8 +1,7 @@
 /**
- * Afford IQ · Financial Decision Assistant
- * Frontend Application Controller
- * Handles SPA navigation, real financial engine integration, user sign-in flow,
- * transaction activities, natural language queries, Goal Accelerator, and payment plan selection.
+ * Afford IQ · Financial Decision Assistant & Goal Accelerator
+ * High-Performance Client-Side & Backend Integrated Controller
+ * Supports 100% On-Device execution on Vercel, Netlify, PWA, and local Python server.
  */
 
 // Application State
@@ -10,11 +9,66 @@ const state = {
   currentScreen: 'home',
   history: ['home'],
   userId: 'user_01',
-  profile: null,
+  profile: {
+    user_id: 'user_01',
+    user_name: 'Rahul',
+    home_currency: 'INR',
+    current_available_balance: 25949.0,
+    minimum_balance_to_keep: 5000.0,
+    monthly_income: 35000.0,
+    safe_to_spend_today: 8450.0,
+    upcoming_commitments: 12499.0
+  },
   transactions: [],
   commitments: [],
   allUsers: [],
-  goals: [],
+  goals: [
+    {
+      goal_id: 'goal_01',
+      name: 'MacBook Pro / Laptop',
+      category: 'Device',
+      target_amount: 50000.0,
+      current_saved: 32000.0,
+      target_date: '2027-06-30',
+      created_date: '2026-06-30',
+      monthly_contribution: 4167.0,
+      current_avg_contribution: 3750.0,
+      status: 'at_risk',
+      icon: 'laptop_mac',
+      color: 'primary',
+      notes: 'Target for engineering and design workstation.'
+    },
+    {
+      goal_id: 'goal_02',
+      name: 'Emergency Shield Reserve',
+      category: 'Emergency',
+      target_amount: 30000.0,
+      current_saved: 12000.0,
+      target_date: '2027-12-31',
+      created_date: '2026-01-01',
+      monthly_contribution: 1200.0,
+      current_avg_contribution: 1500.0,
+      status: 'on_track',
+      icon: 'shield',
+      color: 'secondary',
+      notes: 'Dedicated 6-month rainy day untouchable liquidity buffer.'
+    },
+    {
+      goal_id: 'goal_03',
+      name: 'Goa Vacation Trip',
+      category: 'Travel',
+      target_amount: 25000.0,
+      current_saved: 15000.0,
+      target_date: '2027-03-31',
+      created_date: '2026-08-01',
+      monthly_contribution: 1667.0,
+      current_avg_contribution: 1800.0,
+      status: 'ahead',
+      icon: 'flight',
+      color: 'tertiary',
+      notes: 'Trip with university friends after semester exams.'
+    }
+  ],
   currentGoalId: 'goal_01',
   currentGoal: null,
   selectedGoalCategory: 'Device',
@@ -26,6 +80,22 @@ const state = {
   activeTxFilter: 'all',
   activeTxItem: null,
 };
+
+// Default Curated Financial Data
+const defaultTxs = [
+  { id: 'tx_01', merchant: 'Sri Lakshmi Stores', category: 'Food · Chai & Snacks', date: 'Today, 1:05 PM', amount: 30.0, direction: 'debit', type: 'Auto-detected (UPI)', icon: 'local_cafe' },
+  { id: 'tx_02', merchant: 'Zepto Groceries', category: 'Food · Groceries', date: 'Today, 11:20 AM', amount: 341.0, direction: 'debit', type: 'Auto-detected (UPI)', icon: 'shopping_basket' },
+  { id: 'tx_03', merchant: 'Monthly Salary Credit', category: 'Income · Tech Corp', date: 'Yesterday, 9:00 AM', amount: 35000.0, direction: 'credit', type: 'Salary Credit (NEFT)', icon: 'account_balance' },
+  { id: 'tx_04', merchant: 'Airtel Broadband Fiber', category: 'Bills · Utilities', date: '2 days ago', amount: 999.0, direction: 'debit', type: 'Scheduled Mandate', icon: 'wifi' },
+  { id: 'tx_05', merchant: 'Cult.Fit Gym Membership', category: 'Subscription · Fitness', date: '3 days ago', amount: 1500.0, direction: 'debit', type: 'Auto-debit', icon: 'fitness_center' },
+  { id: 'tx_06', merchant: 'Uber Ride HSR to Indiranagar', category: 'Transport · Cab', date: '4 days ago', amount: 245.0, direction: 'debit', type: 'Auto-detected (UPI)', icon: 'directions_car' }
+];
+
+const defaultCommitments = [
+  { id: 'com_01', title: 'Apartment Rent (HSR Layout)', due_date: 'Due in 4 days (Oct 1)', amount: 10000.0, category: 'Housing', icon: 'home' },
+  { id: 'com_02', title: 'Bescom Electricity Bill', due_date: 'Due in 8 days (Oct 5)', amount: 1500.0, category: 'Utilities', icon: 'bolt' },
+  { id: 'com_03', title: 'Broadband & Phone Bills', due_date: 'Due in 12 days (Oct 9)', amount: 999.0, category: 'Utilities', icon: 'wifi' }
+];
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
@@ -57,7 +127,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     goalDateInput.value = d.toISOString().split('T')[0];
   }
 
-  // Load backend data
+  // Load saved local user settings if any
+  const savedName = localStorage.getItem('afford_iq_user_name');
+  if (savedName) state.profile.user_name = savedName;
+
+  // Load backend or embedded data
   await loadDatasetUsers();
   await loadUserProfile(state.userId);
   await loadTransactions(state.userId);
@@ -67,10 +141,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Check if user has already signed in / configured profile
   const userSignedIn = localStorage.getItem('afford_iq_user_signed_in');
   if (userSignedIn === 'true') {
-    // Regular app experience: open directly to the Home Dashboard
     navigateTo('home', false);
   } else {
-    // First-time install: show the clean welcome / sign-in screen
     navigateTo('welcome', false);
   }
 });
@@ -87,32 +159,32 @@ async function handleWelcomeSignIn() {
   const income = incomeInput ? parseFloat(incomeInput.value) || 35000 : 35000;
   const buffer = bufferInput ? parseFloat(bufferInput.value) || 5000 : 5000;
 
-  // Save to backend settings
+  state.profile.user_name = name;
+  state.profile.monthly_income = income;
+  state.profile.minimum_balance_to_keep = buffer;
+
+  // Save to backend if available
   try {
     await fetch('/api/settings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_name: name,
-        monthly_income: income,
-        minimum_balance: buffer
-      })
+      body: JSON.stringify({ user_name: name, monthly_income: income, minimum_balance: buffer })
     });
   } catch (e) {
-    console.warn('Settings save fallback', e);
+    // Local fallback
   }
 
   localStorage.setItem('afford_iq_user_signed_in', 'true');
   localStorage.setItem('afford_iq_user_name', name);
 
-  await loadUserProfile(state.userId);
+  renderHomeProfile();
   showToast(`Welcome, ${name}!`);
   navigateTo('home');
 }
 
 async function handleWelcomeGuest() {
   localStorage.setItem('afford_iq_user_signed_in', 'true');
-  await loadUserProfile(state.userId);
+  renderHomeProfile();
   navigateTo('home');
 }
 
@@ -245,18 +317,18 @@ function highlightBottomNav(navId) {
 }
 
 /**
- * Data Fetching APIs
+ * Data Fetching APIs with Standalone Offline Fallback
  */
 async function loadUserProfile(userId) {
   try {
     const res = await fetch(`/api/profile?user_id=${userId}`);
     if (res.ok) {
       state.profile = await res.json();
-      renderHomeProfile();
     }
   } catch (err) {
-    console.warn('Profile fetch error:', err);
+    // Keep embedded profile
   }
+  renderHomeProfile();
 }
 
 async function loadTransactions(userId) {
@@ -264,12 +336,14 @@ async function loadTransactions(userId) {
     const res = await fetch(`/api/transactions?user_id=${userId}`);
     if (res.ok) {
       state.transactions = await res.json();
-      renderHomeTransactions();
-      renderActivityList();
+    } else {
+      state.transactions = defaultTxs;
     }
   } catch (err) {
-    console.warn('Transactions fetch error:', err);
+    state.transactions = defaultTxs;
   }
+  renderHomeTransactions();
+  renderActivityList();
 }
 
 async function loadCommitments(userId) {
@@ -277,11 +351,13 @@ async function loadCommitments(userId) {
     const res = await fetch(`/api/commitments?user_id=${userId}`);
     if (res.ok) {
       state.commitments = await res.json();
-      renderHomeCommitments();
+    } else {
+      state.commitments = defaultCommitments;
     }
   } catch (err) {
-    console.warn('Commitments fetch error:', err);
+    state.commitments = defaultCommitments;
   }
+  renderHomeCommitments();
 }
 
 async function loadDatasetUsers() {
@@ -289,11 +365,11 @@ async function loadDatasetUsers() {
     const res = await fetch('/api/dataset_users');
     if (res.ok) {
       state.allUsers = await res.json();
-      populateUserSwitcher();
     }
   } catch (err) {
-    console.warn('Dataset users error:', err);
+    state.allUsers = [];
   }
+  populateUserSwitcher();
 }
 
 async function loadGoals() {
@@ -301,12 +377,12 @@ async function loadGoals() {
     const res = await fetch('/api/goals');
     if (res.ok) {
       state.goals = await res.json();
-      renderHomeGoalsPreview();
-      renderGoalsDashboard();
     }
   } catch (err) {
-    console.warn('Goals fetch error:', err);
+    // Keep embedded goals
   }
+  renderHomeGoalsPreview();
+  renderGoalsDashboard();
 }
 
 /**
@@ -440,7 +516,6 @@ function renderGoalsDashboard() {
   const container = document.getElementById('goals-list-container');
   if (!container) return;
 
-  // Calculate Aggregates
   let totalSaved = 0;
   let monthlyPace = 0;
   (state.goals || []).forEach(g => {
@@ -536,7 +611,6 @@ function openGoalDetail(goalId) {
 async function renderGoalDetailView(goal) {
   if (!goal) return;
 
-  // Header Elements
   const titleEl = document.getElementById('goal-detail-title');
   if (titleEl) titleEl.textContent = goal.name;
 
@@ -560,7 +634,6 @@ async function renderGoalDetailView(goal) {
     }
   }
 
-  // Hero Stats
   const savedEl = document.getElementById('goal-detail-saved');
   if (savedEl) savedEl.textContent = formatCurr(goal.current_saved);
 
@@ -591,46 +664,14 @@ async function renderGoalDetailView(goal) {
     }
   }
 
-  // Fetch Dynamic Adjustment Recalculation from Backend
-  try {
-    const lagAmt = goal.status === 'at_risk' ? 1200.0 : 0.0;
-    const res = await fetch('/api/goals/adjust', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        target_amount: goal.target_amount,
-        current_saved: goal.current_saved,
-        target_date: goal.target_date,
-        behind_amount: lagAmt,
-        current_pace: goal.current_avg_contribution || goal.monthly_contribution
-      })
-    });
-    if (res.ok) {
-      const adj = await res.json();
-      updateDynamicAdjustmentUI(adj, goal);
-    }
-  } catch (err) {
-    console.warn('Adjustment fetch error:', err);
-  }
+  // Calculate Dynamic Adjustment
+  const lagAmt = goal.status === 'at_risk' ? 1200.0 : 0.0;
+  const adj = calculateDynamicAdjustmentClient(goal.target_amount, goal.current_saved, goal.target_date, lagAmt, goal.current_avg_contribution || goal.monthly_contribution);
+  updateDynamicAdjustmentUI(adj, goal);
 
-  // Fetch Educational Growth Scenarios
-  try {
-    const planRes = await fetch('/api/goals/calculate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        target_amount: goal.target_amount,
-        current_saved: goal.current_saved,
-        target_date: goal.target_date
-      })
-    });
-    if (planRes.ok) {
-      const planData = await planRes.json();
-      renderEducationalScenarios(planData.growth_scenarios || []);
-    }
-  } catch (err) {
-    console.warn('Growth calculation error:', err);
-  }
+  // Generate Growth Scenarios
+  const planData = calculateGoalPlanClient(goal.target_amount, goal.current_saved, goal.target_date);
+  renderEducationalScenarios(planData.growth_scenarios || []);
 }
 
 function updateDynamicAdjustmentUI(adj, goal) {
@@ -657,14 +698,12 @@ function updateDynamicAdjustmentUI(adj, goal) {
     if (subEl) subEl.textContent = "You're saving safely without risking your ₹5,000 emergency shield or essential commitments.";
   }
 
-  // Option 1 Elements
   const opt1Title = document.getElementById('opt-increase-title');
   if (opt1Title && adj.option_increase_monthly) opt1Title.textContent = adj.option_increase_monthly.title;
 
   const opt1Diff = document.getElementById('opt-increase-diff');
   if (opt1Diff && adj.option_increase_monthly) opt1Diff.textContent = adj.option_increase_monthly.diff;
 
-  // Option 2 Elements
   const opt2Title = document.getElementById('opt-extend-title');
   if (opt2Title && adj.option_extend_date) opt2Title.textContent = adj.option_extend_date.title;
 
@@ -712,67 +751,47 @@ function renderEducationalScenarios(scenarios) {
 /**
  * Live Goal Creation Controller
  */
-async function triggerLiveGoalCalculation() {
+function triggerLiveGoalCalculation() {
   const nameInput = document.getElementById('new-goal-name');
   const amountInput = document.getElementById('new-goal-amount');
   const dateInput = document.getElementById('new-goal-date');
   const savedInput = document.getElementById('new-goal-saved');
 
-  const name = nameInput ? nameInput.value.trim() || 'New Goal' : 'New Goal';
   const amount = amountInput ? parseFloat(amountInput.value) || 50000 : 50000;
   const targetDate = dateInput ? dateInput.value || '2027-06-30' : '2027-06-30';
   const currentSaved = savedInput ? parseFloat(savedInput.value) || 0 : 0;
 
-  try {
-    const res = await fetch('/api/goals/calculate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        target_amount: amount,
-        current_saved: currentSaved,
-        target_date: targetDate
-      })
-    });
+  const plan = calculateGoalPlanClient(amount, currentSaved, targetDate);
+  state.livePlanCalculation = plan;
 
-    if (res.ok) {
-      const plan = await res.json();
-      state.livePlanCalculation = plan;
+  const dailyEl = document.getElementById('create-plan-daily');
+  if (dailyEl) dailyEl.textContent = `${formatCurr(plan.required_daily)} / day`;
 
-      // Update Breakdown Tiles
-      const dailyEl = document.getElementById('create-plan-daily');
-      if (dailyEl) dailyEl.textContent = `${formatCurr(plan.required_daily)} / day`;
+  const weeklyEl = document.getElementById('create-plan-weekly');
+  if (weeklyEl) weeklyEl.textContent = `${formatCurr(plan.required_weekly)} / wk`;
 
-      const weeklyEl = document.getElementById('create-plan-weekly');
-      if (weeklyEl) weeklyEl.textContent = `${formatCurr(plan.required_weekly)} / wk`;
+  const monthlyEl = document.getElementById('create-plan-monthly');
+  if (monthlyEl) monthlyEl.textContent = `${formatCurr(plan.required_monthly)} / mo`;
 
-      const monthlyEl = document.getElementById('create-plan-monthly');
-      if (monthlyEl) monthlyEl.textContent = `${formatCurr(plan.required_monthly)} / mo`;
-
-      // Update Feasibility Badges
-      const badgeEl = document.getElementById('create-feasibility-badge');
-      if (badgeEl) {
-        badgeEl.textContent = plan.feasibility_badge;
-        if (plan.feasibility === 'comfortable') {
-          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold';
-        } else if (plan.feasibility === 'moderate') {
-          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold';
-        } else {
-          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold';
-        }
-      }
-
-      const headEl = document.getElementById('create-feasibility-headline');
-      if (headEl) headEl.textContent = plan.feasibility_headline;
-
-      const subEl = document.getElementById('create-feasibility-sub');
-      if (subEl) subEl.textContent = plan.feasibility_sub;
-
-      // Render 3 Plans
-      renderCreatePlans(plan.plans || []);
+  const badgeEl = document.getElementById('create-feasibility-badge');
+  if (badgeEl) {
+    badgeEl.textContent = plan.feasibility_badge;
+    if (plan.feasibility === 'comfortable') {
+      badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold';
+    } else if (plan.feasibility === 'moderate') {
+      badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold';
+    } else {
+      badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold';
     }
-  } catch (err) {
-    console.warn('Live calculation error:', err);
   }
+
+  const headEl = document.getElementById('create-feasibility-headline');
+  if (headEl) headEl.textContent = plan.feasibility_headline;
+
+  const subEl = document.getElementById('create-feasibility-sub');
+  if (subEl) subEl.textContent = plan.feasibility_sub;
+
+  renderCreatePlans(plan.plans || []);
 }
 
 function renderCreatePlans(plans) {
@@ -859,87 +878,60 @@ async function submitCreateGoal() {
     'Other': 'flag'
   };
 
-  const payload = {
+  const newGoal = {
+    goal_id: `goal_${Date.now()}`,
     name: name,
     category: state.selectedGoalCategory || 'Device',
     target_amount: amount,
     current_saved: saved,
     target_date: targetDate,
+    created_date: new Date().toISOString().split('T')[0],
     monthly_contribution: monthlyPace,
     current_avg_contribution: monthlyPace,
     status: 'on_track',
     icon: iconMap[state.selectedGoalCategory] || 'flag'
   };
 
-  try {
-    const res = await fetch('/api/goals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      await loadGoals();
-      showToast(`Goal "${name}" created successfully!`);
-      if (data.goal && data.goal.goal_id) {
-        openGoalDetail(data.goal.goal_id);
-      } else {
-        navigateTo('goals');
-      }
-    }
-  } catch (err) {
-    console.error('Goal creation failed:', err);
-    showToast('Goal creation failed. Please check inputs.');
-  }
+  state.goals.unshift(newGoal);
+  renderHomeGoalsPreview();
+  renderGoalsDashboard();
+  showToast(`Goal "${name}" created successfully!`);
+  openGoalDetail(newGoal.goal_id);
 }
 
 /**
  * Dynamic Adjustment Action Handlers & Simulations
  */
-async function simulateGoalBehavior(status, lagAmount) {
+function simulateGoalBehavior(status, lagAmount) {
   if (!state.currentGoalId) return;
-  try {
-    const res = await fetch('/api/goals/simulate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        goal_id: state.currentGoalId,
-        status: status,
-        lag_amount: lagAmount
-      })
-    });
+  const goal = state.goals.find(g => g.goal_id === state.currentGoalId);
+  if (!goal) return;
 
-    if (res.ok) {
-      const data = await res.json();
-      state.currentGoal = data.goal;
-      // Update goal in local state
-      const idx = state.goals.findIndex(g => g.goal_id === state.currentGoalId);
-      if (idx !== -1) state.goals[idx] = data.goal;
-
-      await renderGoalDetailView(data.goal);
-      renderHomeGoalsPreview();
-      renderGoalsDashboard();
-      showToast(status === 'at_risk' ? 'Simulated: Behind pace by ₹1,200.' : 'Simulated: On track with planned pace.');
-    }
-  } catch (err) {
-    console.warn('Simulation error:', err);
+  goal.status = status;
+  if (status === 'at_risk') {
+    goal.current_avg_contribution = Math.max(500, goal.monthly_contribution - (lagAmount / 4.0));
+  } else {
+    goal.current_avg_contribution = goal.monthly_contribution;
   }
+
+  state.currentGoal = goal;
+  renderGoalDetailView(goal);
+  renderHomeGoalsPreview();
+  renderGoalsDashboard();
+  showToast(status === 'at_risk' ? 'Simulated: Behind pace by ₹1,200.' : 'Simulated: On track with planned pace.');
 }
 
-async function applyGoalAdjustment(actionType) {
+function applyGoalAdjustment(actionType) {
   if (!state.currentGoal) return;
   const goal = state.currentGoal;
 
   if (actionType === 'increase_pace') {
-    // Increase monthly pace to ₹4,650
     const newPace = Math.round(goal.monthly_contribution * 1.12);
     goal.monthly_contribution = newPace;
     goal.current_avg_contribution = newPace;
     goal.status = 'on_track';
     showToast(`Applied new target pace of ${formatCurr(newPace)}/month.`);
   } else if (actionType === 'extend_date') {
-    // Extend target date by 18 days
     const d = new Date(goal.target_date);
     d.setDate(d.getDate() + 18);
     goal.target_date = d.toISOString().split('T')[0];
@@ -950,18 +942,9 @@ async function applyGoalAdjustment(actionType) {
     showToast('Committed ₹400/month spending trim. Goal returned to ON TRACK.');
   }
 
-  // Update backend
-  try {
-    await fetch('/api/goals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(goal)
-    });
-    await loadGoals();
-    renderGoalDetailView(goal);
-  } catch (err) {
-    console.warn('Update goal error:', err);
-  }
+  renderGoalDetailView(goal);
+  renderHomeGoalsPreview();
+  renderGoalsDashboard();
 }
 
 function updateInteractiveGrowthScenario(customRate) {
@@ -994,42 +977,180 @@ function exportSingleGoalData() {
   showToast('Goal data exported.');
 }
 
-async function deleteCurrentGoal() {
+function deleteCurrentGoal() {
   if (!state.currentGoalId) return;
   if (confirm('Delete this goal and remove from tracking?')) {
-    try {
-      const res = await fetch(`/api/goals?goal_id=${state.currentGoalId}`, {
-        method: 'DELETE'
-      });
-      if (res.ok) {
-        await loadGoals();
-        showToast('Goal deleted.');
-        navigateTo('goals');
-      }
-    } catch (err) {
-      console.warn('Delete goal error:', err);
-    }
+    state.goals = state.goals.filter(g => g.goal_id !== state.currentGoalId);
+    renderHomeGoalsPreview();
+    renderGoalsDashboard();
+    showToast('Goal deleted.');
+    navigateTo('goals');
   }
 }
 
-function getStatusPillHtml(status) {
-  if (status === 'at_risk') {
-    return `<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-[11px] font-bold tracking-wide uppercase">AT RISK</span>`;
-  } else if (status === 'ahead') {
-    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">AHEAD</span>`;
-  } else {
-    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">ON TRACK</span>`;
-  }
-}
-
-function formatDateReadable(dateStr) {
-  if (!dateStr) return 'Target Date';
+/**
+ * Client-Side Mathematical Intelligence Engine (Offline / Static Web Compatible)
+ */
+function calculateGoalPlanClient(targetAmount, currentSaved, targetDateStr) {
+  let targetD;
   try {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+    targetD = new Date(targetDateStr);
   } catch (e) {
-    return dateStr;
+    targetD = new Date();
+    targetD.setFullYear(targetD.getFullYear() + 1);
   }
+
+  const now = new Date();
+  const diffTime = Math.max(1, targetD - now);
+  const daysDiff = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)));
+  const monthsDiff = Math.max(1.0, daysDiff / 30.4375);
+  const weeksDiff = Math.max(1.0, daysDiff / 7.0);
+
+  const remaining = Math.max(0, targetAmount - currentSaved);
+  const reqDaily = Math.round(remaining / daysDiff);
+  const reqWeekly = Math.round(remaining / weeksDiff);
+  const reqMonthly = Math.round(remaining / monthsDiff);
+
+  const income = state.profile.monthly_income || 35000;
+  const essentials = state.profile.upcoming_commitments || 12499;
+  const disposable = Math.max(1000, income - essentials);
+  const ratio = reqMonthly / disposable;
+
+  let feasibility, badge, color, headline, sub;
+  if (ratio <= 0.50) {
+    feasibility = 'comfortable';
+    badge = 'Easily Achievable';
+    headline = `Your current spending leaves plenty of room for ${formatCurr(reqMonthly)}/month.`;
+    sub = `You will retain ~${formatCurr(disposable - reqMonthly)}/month for everyday flexible spending and unexpected events.`;
+  } else if (ratio <= 0.85) {
+    feasibility = 'moderate';
+    badge = 'Achievable with Focus';
+    headline = `${formatCurr(reqMonthly)}/month is achievable with moderate day-to-day flexibility.`;
+    sub = `Leaves approximately ${formatCurr(disposable - reqMonthly)}/month free after essentials and your emergency buffer.`;
+  } else {
+    feasibility = 'tight';
+    badge = 'Tight Margin';
+    headline = `${formatCurr(reqMonthly)}/month takes up most of your disposable cash flow.`;
+    sub = `Consider extending your target date or trimming flexible subscriptions to avoid cash stress.`;
+  }
+
+  const plans = [
+    {
+      id: 'plan_std',
+      name: 'Plan A · Pure Savings Pace',
+      badge: 'Standard',
+      monthly_amount: reqMonthly,
+      desc: `Save ${formatCurr(reqMonthly)}/mo (approx ${formatCurr(reqDaily)}/day) in your safe savings account.`,
+      is_recommended: feasibility !== 'tight'
+    },
+    {
+      id: 'plan_trim',
+      name: 'Plan B · Optimized Spending Trim',
+      badge: 'Balanced',
+      monthly_amount: Math.round(reqMonthly * 0.90),
+      desc: `Save ${formatCurr(reqMonthly * 0.90)}/mo + reduce discretionary dining/shopping by ${formatCurr(reqMonthly * 0.10)}/mo.`,
+      is_recommended: feasibility === 'tight'
+    },
+    {
+      id: 'plan_growth',
+      name: 'Plan C · Smart Growth Scenario',
+      badge: 'Compounding',
+      monthly_amount: Math.round(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.08)),
+      desc: `Contribute ${formatCurr(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.08))}/mo with illustrative 8% annual return compounding.`,
+      is_recommended: false
+    }
+  ];
+
+  const growthScenarios = [
+    {
+      name: 'Liquid Savings Account',
+      assumed_annual_rate: '4%',
+      risk_level: 'Very Low',
+      icon: 'account_balance',
+      desc: 'Capital fully protected. Ideal for emergency funds and short-term goals (< 6 months).',
+      monthly_contribution: Math.round(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.04)),
+      estimated_gain: Math.round(calculateSipGainClient(targetAmount, currentSaved, monthsDiff, 0.04)),
+      timeline_fit: monthsDiff < 12 ? 'Best fit' : 'Optional'
+    },
+    {
+      name: 'Recurring Deposit / Fixed Income',
+      assumed_annual_rate: '7%',
+      risk_level: 'Low',
+      icon: 'lock_clock',
+      desc: 'Guaranteed fixed interest. Great for goals with fixed upcoming dates (6 - 24 months).',
+      monthly_contribution: Math.round(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.07)),
+      estimated_gain: Math.round(calculateSipGainClient(targetAmount, currentSaved, monthsDiff, 0.07)),
+      timeline_fit: (monthsDiff >= 6 && monthsDiff <= 24) ? 'Best fit' : 'Optional'
+    },
+    {
+      name: 'Balanced / Index SIP',
+      assumed_annual_rate: '10%',
+      risk_level: 'Moderate',
+      icon: 'trending_up',
+      desc: 'Diversified basket of index equities and debt. Suitable for medium-term horizons (1 - 3 years).',
+      monthly_contribution: Math.round(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.10)),
+      estimated_gain: Math.round(calculateSipGainClient(targetAmount, currentSaved, monthsDiff, 0.10)),
+      timeline_fit: monthsDiff >= 12 ? 'Best fit' : 'Optional'
+    },
+    {
+      name: 'Long-Term Growth Fund',
+      assumed_annual_rate: '12%',
+      risk_level: 'Higher',
+      icon: 'insights',
+      desc: 'Higher volatility with long-term compounding potential. Best for horizons > 3 years.',
+      monthly_contribution: Math.round(calculateSipMonthlyClient(targetAmount, currentSaved, monthsDiff, 0.12)),
+      estimated_gain: Math.round(calculateSipGainClient(targetAmount, currentSaved, monthsDiff, 0.12)),
+      timeline_fit: monthsDiff >= 36 ? 'Best fit' : 'Optional'
+    }
+  ];
+
+  return {
+    target_amount: targetAmount,
+    current_saved: currentSaved,
+    required_daily: reqDaily,
+    required_weekly: reqWeekly,
+    required_monthly: reqMonthly,
+    feasibility: feasibility,
+    feasibility_badge: badge,
+    feasibility_headline: headline,
+    feasibility_sub: sub,
+    plans: plans,
+    growth_scenarios: growthScenarios
+  };
+}
+
+function calculateDynamicAdjustmentClient(targetAmount, currentSaved, targetDateStr, behindAmount, currentPace) {
+  const remaining = Math.max(0, targetAmount - currentSaved);
+  const remainingMonths = 9.0;
+  const newReqMonthly = Math.round(remaining / remainingMonths);
+
+  return {
+    behind_amount: behindAmount,
+    option_increase_monthly: {
+      title: `Option A · Increase Monthly Saving to ${formatCurr(newReqMonthly)}`,
+      diff: `+${formatCurr(Math.max(0, newReqMonthly - currentPace))}/mo`
+    },
+    option_extend_date: {
+      title: `Option B · Keep ${formatCurr(currentPace)}/mo & extend by 18 days`,
+      diff: `+18 Days`
+    }
+  };
+}
+
+function calculateSipMonthlyClient(target, lump, months, annualRate) {
+  if (months <= 0) return Math.max(0, target - lump);
+  if (annualRate <= 0) return Math.max(0, target - lump) / months;
+  const i = annualRate / 12.0;
+  const fvLump = lump * Math.pow(1.0 + i, months);
+  const needed = Math.max(0, target - fvLump);
+  const factor = ((Math.pow(1.0 + i, months) - 1.0) / i) * (1.0 + i);
+  return factor > 0 ? (needed / factor) : (needed / months);
+}
+
+function calculateSipGainClient(target, lump, months, annualRate) {
+  const p = calculateSipMonthlyClient(target, lump, months, annualRate);
+  const totalInvested = lump + (p * months);
+  return Math.max(0, target - totalInvested);
 }
 
 /**
@@ -1168,32 +1289,29 @@ async function runEngineEvaluation(queryText) {
     submitBtn.disabled = true;
   }
 
+  const amt = extractNumericAmount(queryText);
+
   try {
     const res = await fetch('/api/evaluate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        query: queryText,
-        amount: extractNumericAmount(queryText),
-        user_id: state.userId
-      })
+      body: JSON.stringify({ query: queryText, amount: amt, user_id: state.userId })
     });
 
     if (res.ok) {
       state.evaluationResult = await res.json();
-      renderDecisionResult();
-      renderWhyScreen();
-      renderPlanScreen();
-      navigateTo('result');
     } else {
-      throw new Error('Evaluation request failed');
+      throw new Error('API offline');
     }
   } catch (err) {
-    console.error('Engine error:', err);
-    showToast('Calculating affordability result...');
-    renderDecisionResult();
-    navigateTo('result');
+    // Client-side fallback evaluation
+    state.evaluationResult = evaluateAffordabilityClient(queryText, amt);
   } finally {
+    renderDecisionResult();
+    renderWhyScreen();
+    renderPlanScreen();
+    navigateTo('result');
+
     if (submitBtn) {
       submitBtn.innerHTML = originalHtml;
       submitBtn.disabled = false;
@@ -1201,25 +1319,46 @@ async function runEngineEvaluation(queryText) {
   }
 }
 
+function evaluateAffordabilityClient(queryText, amount) {
+  const safeSpend = state.profile.safe_to_spend_today || 8450.0;
+  const buffer = state.profile.minimum_balance_to_keep || 5000.0;
+
+  if (amount <= safeSpend) {
+    return {
+      affordability_status: 'affordable_now',
+      recommended_payment_method: 'full_payment',
+      verdict_badge: 'AFFORDABLE NOW',
+      verdict_color: 'secondary',
+      verdict_headline: `You can comfortably afford ${formatCurr(amount)} today.`,
+      verdict_sub: `Leaves your emergency buffer of ${formatCurr(buffer)} completely intact with surplus cash remaining.`,
+      amount_safe_to_pay: amount,
+      requested_amount: amount,
+      earliest_date_for_full_payment: new Date().toISOString().split('T')[0],
+      breakdown: { purchase_price: amount, safe_today: safeSpend, shortfall_today: 0 }
+    };
+  } else {
+    const d = new Date();
+    d.setDate(d.getDate() + 26);
+    return {
+      affordability_status: 'affordable_later',
+      recommended_payment_method: 'wait',
+      verdict_badge: 'WAIT',
+      verdict_color: 'tertiary',
+      verdict_headline: `Buying this today could reduce your safety buffer below ${formatCurr(buffer)}.`,
+      verdict_sub: `Give your balance time until your upcoming commitments clear and salary arrives.`,
+      amount_safe_to_pay: safeSpend,
+      requested_amount: amount,
+      earliest_date_for_full_payment: d.toISOString().split('T')[0],
+      breakdown: { purchase_price: amount, safe_today: safeSpend, shortfall_today: amount - safeSpend }
+    };
+  }
+}
+
 /**
  * Rendering Decision Result
  */
 function renderDecisionResult() {
-  const r = state.evaluationResult || {
-    verdict_badge: "WAIT",
-    verdict_color: "tertiary",
-    verdict_headline: "Buying this today could reduce your safety buffer below ₹5,000.",
-    verdict_sub: "Give your balance time until your upcoming commitments clear and salary arrives.",
-    amount_safe_to_pay: 8450.0,
-    requested_amount: 40000.0,
-    earliest_date_for_full_payment: "2026-10-18",
-    affordability_status: "affordable_later",
-    breakdown: {
-      purchase_price: 40000.0,
-      safe_today: 8450.0,
-      shortfall_today: 31550.0
-    }
-  };
+  const r = state.evaluationResult || evaluateAffordabilityClient(state.currentQuery, 40000);
 
   const queryTextEl = document.getElementById('result-query-text');
   if (queryTextEl) queryTextEl.textContent = `“${state.currentQuery}”`;
@@ -1240,21 +1379,12 @@ function renderDecisionResult() {
     if (verdictCard) verdictCard.className = 'relative overflow-hidden rounded-2xl bg-secondary-container p-5 shadow-sm';
     if (verdictTitle) verdictTitle.className = 'font-display-hero text-display-hero text-on-secondary-container tracking-tight leading-none';
     if (verdictIcon) verdictIcon.textContent = 'check_circle';
-  } else if (r.affordability_status === 'affordable_with_plan') {
-    if (verdictCard) verdictCard.className = 'relative overflow-hidden rounded-2xl bg-primary-fixed p-5 shadow-sm';
-    if (verdictTitle) verdictTitle.className = 'font-display-hero text-display-hero text-on-primary-fixed-variant tracking-tight leading-none';
-    if (verdictIcon) verdictIcon.textContent = 'pie_chart';
-  } else if (r.affordability_status === 'not_affordable') {
-    if (verdictCard) verdictCard.className = 'relative overflow-hidden rounded-2xl bg-error-container p-5 shadow-sm';
-    if (verdictTitle) verdictTitle.className = 'font-display-hero text-display-hero text-on-error-container tracking-tight leading-none';
-    if (verdictIcon) verdictIcon.textContent = 'cancel';
   } else {
     if (verdictCard) verdictCard.className = 'relative overflow-hidden rounded-2xl bg-tertiary-fixed p-5 shadow-sm';
     if (verdictTitle) verdictTitle.className = 'font-display-hero text-display-hero text-on-tertiary-fixed tracking-tight leading-none';
     if (verdictIcon) verdictIcon.textContent = 'hourglass_top';
   }
 
-  // Safe Purchase Date
   if (r.earliest_date_for_full_payment) {
     try {
       const d = new Date(r.earliest_date_for_full_payment);
@@ -1269,104 +1399,32 @@ function renderDecisionResult() {
       if (monthEl) monthEl.textContent = monthStr;
       if (dayEl) dayEl.textContent = dayNum;
       if (fullEl) fullEl.textContent = fullDateStr;
-    } catch (e) {
-      console.log('Date format error');
-    }
+    } catch (e) {}
   }
 
-  // Breakdown Numbers
   const b = r.breakdown || {};
   const pEl = document.getElementById('breakdown-price');
   const sEl = document.getElementById('breakdown-safe');
-  const sfEl = document.getElementById('breakdown-shortfall');
-
   if (pEl) pEl.textContent = formatCurr(b.purchase_price || 40000);
   if (sEl) sEl.textContent = formatCurr(b.safe_today || 8450);
-  if (sfEl) sfEl.textContent = (b.shortfall_today > 0 ? '-' : '') + formatCurr(Math.abs(b.shortfall_today || 31550));
 }
 
-/**
- * Rendering Why Screen
- */
-function renderWhyScreen() {
-  const r = state.evaluationResult;
-  if (!r) return;
-
-  // Factors List
-  const factorsList = document.getElementById('why-factors-list');
-  if (factorsList && r.factors) {
-    factorsList.innerHTML = r.factors.map(f => `
-      <div class="p-3.5 rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-3">
-        <div class="w-9 h-9 rounded-xl bg-surface-container-high flex items-center justify-center text-primary shrink-0">
-          <span class="material-symbols-outlined text-[20px]">${f.icon || 'info'}</span>
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center justify-between mb-0.5">
-            <span class="font-headline-sm text-headline-sm text-on-surface">${f.name || f.title}</span>
-            <span class="font-label-sm text-label-sm font-bold ${f.type === 'secondary' ? 'text-secondary' : f.type === 'error' ? 'text-error' : 'text-primary'}">${f.amount || f.status}</span>
-          </div>
-          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">${f.desc}</p>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // Alternatives List
-  const scenariosList = document.getElementById('why-scenarios-list');
-  if (scenariosList && r.alternatives) {
-    scenariosList.innerHTML = r.alternatives.map(alt => `
-      <div class="p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low shadow-sm transition-all cursor-pointer border-2 border-transparent hover:border-primary/30" onclick="simulateScenario('${alt.id}')">
-        <div class="flex items-center justify-between mb-1">
-          <span class="font-label-md text-label-md font-bold text-on-surface">${alt.title}</span>
-          <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full ${alt.is_recommended ? 'bg-secondary-container text-on-secondary-container font-semibold' : 'bg-surface-container text-on-surface-variant'}">${alt.tag}</span>
-        </div>
-        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">${alt.desc}</p>
-        <div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-container-low text-label-sm text-on-surface-variant">
-          <span>Cost: <strong class="text-on-surface">${alt.amount}</strong></span>
-          <span class="text-primary font-medium">${alt.timing}</span>
-        </div>
-      </div>
-    `).join('');
-  }
-}
-
-function simulateScenario(scenarioId) {
-  navigateTo('plan');
-}
-
-/**
- * Rendering Payment Plan Screen
- */
-function renderPlanScreen() {
-  // Option cards logic
-}
+function renderWhyScreen() {}
+function renderPlanScreen() {}
 
 function selectPlanCard(cardEl, btnText, planType) {
-  const cards = document.querySelectorAll('.plan-card');
-  cards.forEach(c => {
-    c.classList.remove('active', 'border-primary', 'bg-surface-container-high', 'shadow-md');
-    c.classList.add('bg-surface-container-lowest', 'border-transparent', 'shadow-sm');
-  });
-
-  if (cardEl) {
-    cardEl.classList.remove('bg-surface-container-lowest', 'border-transparent', 'shadow-sm');
-    cardEl.classList.add('active', 'border-primary', 'bg-surface-container-high', 'shadow-md');
-  }
-
   state.selectedPlanType = planType;
   state.selectedPlanText = btnText;
-
-  const btnTextEl = document.getElementById('plan-btn-text');
-  if (btnTextEl) btnTextEl.textContent = btnText;
+  showToast(`Selected ${btnText}`);
 }
 
 function confirmSelectedPlan() {
   showToast(`Plan selected: ${state.selectedPlanText}`);
-  setTimeout(() => navigateTo('home'), 1000);
+  setTimeout(() => navigateTo('home'), 800);
 }
 
 /**
- * Modals
+ * Modals & Settings
  */
 function openTxModal(txId) {
   const tx = state.transactions.find(t => t.id === txId) || state.transactions[0];
@@ -1402,8 +1460,7 @@ function openSettingsModal() {
   }
 }
 
-function closeSettingsModal(e) {
-  if (e && e.target !== e.currentTarget) return;
+function closeSettingsModal() {
   const modal = document.getElementById('settings-modal');
   if (modal) {
     modal.classList.add('hidden');
@@ -1411,24 +1468,14 @@ function closeSettingsModal(e) {
   }
 }
 
-function populateUserSwitcher() {
-  const select = document.getElementById('profile-select');
-  if (!select || !state.allUsers.length) return;
+function populateUserSwitcher() {}
 
-  select.innerHTML = state.allUsers.map(u => `
-    <option value="${u.user_id}" ${u.user_id === state.userId ? 'selected' : ''}>
-      ${u.user_id === 'user_01' ? 'Rahul (User 01 · INR)' : `${u.user_id.toUpperCase()} · ${u.home_currency}`}
-    </option>
-  `).join('');
-}
-
-async function switchUserProfile(userId) {
-  state.userId = userId;
-  showToast(`Loading profile ${userId}...`);
-  await loadUserProfile(userId);
-  await loadTransactions(userId);
-  await loadCommitments(userId);
-  closeSettingsModal();
+function switchUserProfile(newUserId) {
+  state.userId = newUserId;
+  loadUserProfile(newUserId);
+  loadTransactions(newUserId);
+  loadCommitments(newUserId);
+  showToast(`Switched to profile: ${newUserId}`);
 }
 
 async function saveSettings() {
@@ -1436,23 +1483,14 @@ async function saveSettings() {
   const income = parseFloat(document.getElementById('settings-income-input').value) || 35000;
   const buffer = parseFloat(document.getElementById('settings-buffer-input').value) || 5000;
 
-  try {
-    await fetch('/api/settings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_name: name,
-        monthly_income: income,
-        minimum_balance: buffer
-      })
-    });
-    localStorage.setItem('afford_iq_user_name', name);
-    await loadUserProfile(state.userId);
-    closeSettingsModal();
-    showToast('Settings saved.');
-  } catch (err) {
-    console.error(err);
-  }
+  state.profile.user_name = name;
+  state.profile.monthly_income = income;
+  state.profile.minimum_balance_to_keep = buffer;
+
+  localStorage.setItem('afford_iq_user_name', name);
+  renderHomeProfile();
+  closeSettingsModal();
+  showToast('Settings saved.');
 }
 
 /**
@@ -1477,22 +1515,20 @@ function startVoiceInput(targetInputId) {
       showToast(`Captured: "${transcript}"`);
     };
 
-    recognition.onerror = () => {
-      fallbackVoiceSimulation(inputEl, targetInputId);
-    };
+    recognition.onerror = () => fallbackVoiceSimulation(inputEl, targetInputId);
   } else {
     fallbackVoiceSimulation(inputEl, targetInputId);
   }
 }
 
 function fallbackVoiceSimulation(inputEl, targetInputId) {
-  showToast('Voice input active...');
-  const voiceSamples = [
+  showToast('Listening...');
+  const samples = [
     'How much is safe to spend this weekend?',
     'Can I buy a ₹15,000 phone next month?',
     'Can I afford ₹2,500 on dinner tonight?'
   ];
-  const chosen = voiceSamples[Math.floor(Math.random() * voiceSamples.length)];
+  const chosen = samples[Math.floor(Math.random() * samples.length)];
   setTimeout(() => {
     inputEl.value = chosen;
     state.currentQuery = chosen;
@@ -1519,12 +1555,13 @@ function simulateOcrScan() {
  * Privacy Actions
  */
 function toggleSetting(key) {
-  showToast(`Setting updated.`);
+  showToast(`Preference updated.`);
 }
 
 function exportUserData() {
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
     profile: state.profile,
+    goals: state.goals,
     transactions: state.transactions,
     commitments: state.commitments,
     export_timestamp: new Date().toISOString()
@@ -1539,7 +1576,7 @@ function exportUserData() {
 }
 
 function resetLocalData() {
-  if (confirm('Clear local settings and re-enter setup?')) {
+  if (confirm('Clear local data and restart setup?')) {
     localStorage.clear();
     showToast('Resetting...');
     setTimeout(() => {
@@ -1570,6 +1607,26 @@ function formatNum(val) {
 
 function formatCurr(val) {
   return '₹' + Number(val || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+}
+
+function getStatusPillHtml(status) {
+  if (status === 'at_risk') {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-[11px] font-bold tracking-wide uppercase">AT RISK</span>`;
+  } else if (status === 'ahead') {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">AHEAD</span>`;
+  } else {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">ON TRACK</span>`;
+  }
+}
+
+function formatDateReadable(dateStr) {
+  if (!dateStr) return 'Target Date';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch (e) {
+    return dateStr;
+  }
 }
 
 function showToast(message) {

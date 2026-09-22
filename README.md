@@ -24,6 +24,7 @@ Traditional financial assistants upload sensitive financial text messages, bank 
 
 | Feature | Description |
 |---|---|
+| 🎯 **Goal Accelerator** | Transforms long-term purchases (laptops, trips, emergency funds) into behavior-aware daily/weekly/monthly contribution plans with dynamic course correction and educational SIP growth scenarios. |
 | 💳 **Safe-to-Spend Flagship Hero** | Instantly calculates your real liquid disposable allowance after strictly protecting upcoming bills, rent, EMIs, and your chosen emergency shield buffer. |
 | 💬 **Ask Afford IQ** | Natural language purchase evaluation (*"Can I buy a ₹15,000 phone next month?"*, *"How much is safe to spend this weekend?"*, *"Can I afford ₹2,500 for dinner tonight?"*). |
 | 🛡️ **4 Decision Verdicts** | Delivers clear verdicts within seconds: **BUY NOW** (`affordable_now`), **CHANGE PLAN** (`affordable_with_plan`), **WAIT** (`affordable_later`), or **NOT AFFORDABLE** (`not_affordable`). |
@@ -32,6 +33,28 @@ Traditional financial assistants upload sensitive financial text messages, bank 
 | 🧾 **Multi-Modal Local Tools** | On-device voice input query simulation, local receipt OCR tag scanning, and UPI link pasting. |
 | 📊 **Categorized Activity Ledger** | Clean transaction ledger with category filters (`Food`, `Transport`, `Shopping`, `Bills`, `Subscriptions`) and interactive detail receipts. |
 | 🔐 **Privacy Center & Vault Export** | Complete user sovereignty with instant toggles, offline encrypted caching, and 1-tap JSON vault export/reset. |
+
+---
+
+## 🌐 Deploy to Vercel or Netlify (Public Web Version)
+
+Afford IQ is pre-configured for instant zero-configuration deployment to **Vercel**, **Netlify**, or any static web host.
+
+### ⚡ Option A: Deploy with Vercel (1-Click / CLI)
+1. Import this GitHub repository into your [Vercel Dashboard](https://vercel.com/new).
+2. The included [`vercel.json`](vercel.json) automatically routes all traffic directly to the web app.
+3. Click **Deploy**. Your live, publicly accessible link (`https://afford-iq.vercel.app`) will be ready in under 30 seconds!
+
+Or deploy via terminal:
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+### 🌲 Option B: Deploy with Netlify
+1. Import this repository into your [Netlify Dashboard](https://app.netlify.com/start).
+2. The included [`netlify.toml`](netlify.toml) automatically sets the publish directory to `web/` with full SPA redirects.
+3. Click **Deploy Site**.
 
 ---
 
@@ -52,8 +75,9 @@ iQOO devices are engineered for extreme on-device compute, featuring top-tier AI
    │              Afford IQ Mobile UI (web/)                    │
    │  Mobile-First SPA · Plus Jakarta Sans · Material Symbols   │
    │  Service Worker PWA · Offline Caching · Touch Gestures     │
+   │  Built-in Client-Side Math Engine (Zero-Cloud Web Ready)   │
    └─────────────────────────────┬──────────────────────────────┘
-                                 │ Localhost HTTP REST
+                                 │ Localhost HTTP REST / Offline
                                  ▼
    ┌────────────────────────────────────────────────────────────┐
    │                       app.py                               │
@@ -62,10 +86,10 @@ iQOO devices are engineered for extreme on-device compute, featuring top-tier AI
                   │                              │
                   ▼                              ▼
    ┌──────────────────────────────┐ ┌───────────────────────────┐
-   │   SafeAmountEngine (code/)   │ │ PaymentPlanOptimizer (code/)│
-   │  - 90-day cash flow forecast │ │  - Installment/EMI search │
-   │  - Pre-salary trough safety  │ │  - Spending change prune  │
-   │  - Reserved pending debits   │ │  - Candidate ranking      │
+   │   SafeAmountEngine (code/)   │ │   GoalEngine (code/)      │
+   │  - 90-day cash flow forecast │ │  - Daily/Weekly/Monthly   │
+   │  - Pre-salary trough safety  │ │  - Dynamic Adjustment     │
+   │  - Reserved pending debits   │ │  - 4 Growth Scenarios     │
    └──────────────┬───────────────┘ └───────────┬───────────────┘
                   │                              │
                   ▼                              ▼
@@ -80,7 +104,7 @@ iQOO devices are engineered for extreme on-device compute, featuring top-tier AI
 
 ---
 
-## 🏃 How to Run the Prototype
+## 🏃 How to Run Locally
 
 ### Method 1: 1-Click Startup (Windows)
 Double-click `run_app.bat` in the repository root.
@@ -105,6 +129,9 @@ python app.py 8000
 
 ```text
 afford-IQ/
+├── vercel.json                # Vercel zero-config routing rules
+├── netlify.toml               # Netlify SPA publication settings
+├── index.html                 # Root redirect entry point
 ├── app.py                     # On-device server & REST API controller
 ├── run_app.bat                # 1-click Windows launcher
 ├── README.md                  # Project documentation
@@ -116,6 +143,7 @@ afford-IQ/
 │   ├── sw.js                  # Service Worker for offline asset caching
 │   └── assets/                # App logo and user avatars
 ├── code/                      # On-device financial intelligence engine
+│   ├── goal_engine.py         # Goal Accelerator, pace recalculation & SIP scenarios
 │   ├── safe_amount_engine.py  # Pre-salary trough safety calculator
 │   ├── optimizer.py           # Payment plan candidate ranker
 │   ├── forecaster.py          # 90-day daily cash flow timeline engine
@@ -134,7 +162,7 @@ afford-IQ/
 - ✅ **25/25 Public Benchmark Samples:** 100% exact agreement on payment method and affordability status.
 - ✅ **61/61 Unit & Adversarial Tests:** Passing all cash-flow timeline and safety tests.
 - ✅ **100% Deterministic:** Bit-for-bit identical results on every evaluation with zero LLM API cost.
-- ✅ **Zero Data Transmission:** Verified zero network requests sent outside localhost.
+- ✅ **Zero Data Transmission:** Verified zero network requests sent outside device.
 
 ---
 
