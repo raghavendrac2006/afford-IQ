@@ -774,3 +774,26 @@ branch=main
 repo_root=a:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T14:48:00.000000+00:00] Complete Cache Invalidation and Human UI Verification
+
+User Prompt (verbatim, secrets redacted):
+i still see those badges in the home screen saying on device ai and local only and why is there some random words like _ RK in the search bar in the home screen and also remvoe that instant check badge in that 
+now talking about the activity screen please remove this live runway and real time badges and in askIq screen remove the neural engine badge and also the gemini type stars in the search box and in the privacy screen remove that local first architecture badge 
+as i already told you it must be like human made and not ai made
+
+Agent Response Summary:
+Resolved the Service Worker caching issue that was serving a stale cache in the user's browser. Updated sw.js with a Network-First strategy and cache-busting version v3-clean. Replaced non-standard Material Symbol ligatures (search_spark, auto_awesome) with clean standard icons (search, edit, help_outline) preventing broken text rendering like '_ RK'. Confirmed that all badges ('On-Device AI', 'Local Only', 'Instant Check', 'Live Runway', 'Realtime', 'Neural Engine', 'Local-first architecture') are completely eliminated from the live served HTML and pushed all fixes to GitHub.
+
+Actions:
+* Updated web/sw.js with network-first strategy and cache auto-purge
+* Updated web/app.js to clear old caches on initialization
+* Verified live served HTML from app.py
+* Committed and pushed all updates to https://github.com/raghavendrac2006/afford-IQ.git
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=a:\Hackerrank
+worktree=main
+parent_agent=none
