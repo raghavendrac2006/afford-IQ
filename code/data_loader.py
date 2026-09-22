@@ -1,6 +1,6 @@
 """
-Data Loader for HackerRank Orchestrate: Buy or Wait?
-Loads CSV files and converts them into strongly-typed Data Models.
+Data Loader for Afford IQ On-Device Financial Decision Agent
+Loads and parses CSV files into strongly typed Pydantic models.
 """
 import os
 import pandas as pd

@@ -1,6 +1,6 @@
 """
-Relationship Indexes for HackerRank Orchestrate: Buy or Wait?
-Provides fast O(1) lookups for dataset relationships.
+Relationship Indexes for Afford IQ On-Device Financial Decision Agent
+Provides O(1) in-memory lookups for profiles, events, options, and exchange rates.
 """
 from typing import List, Dict, Tuple, Optional
 from collections import defaultdict

@@ -1,6 +1,6 @@
 """
-Financial State Reconstruction for HackerRank Orchestrate: Buy or Wait?
-Reconstructs user's baseline financial position on a given request date.
+Financial State Reconstruction for Afford IQ On-Device Financial Decision Agent
+Calculates liquid cash positions, reserved pending debits, and essential budgets.
 """
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional

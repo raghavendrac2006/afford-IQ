@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Afford IQ Mobile Prototype Backend Server
-Integrates the validated HackerRank Orchestrate "Buy or Wait?" financial decision engine
-with a modern, responsive mobile-first UI prototype.
+Afford IQ · On-Device Financial Decision Agent Server
+High-performance local backend powering the mobile-first Afford IQ prototype
+with on-device cash flow intelligence, zero cloud leakage, and instant query evaluation.
 """
 
 import os

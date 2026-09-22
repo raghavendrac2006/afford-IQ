@@ -1,6 +1,6 @@
 """
-Cash Flow Forecaster for HackerRank Orchestrate: Buy or Wait?
-Simulates daily cash balance over a 90-day horizon from request_date.
+Cash Flow Forecaster for Afford IQ On-Device Financial Decision Agent
+Projects conservative 90-day daily cash balance timelines with pre-salary troughs.
 """
 from dataclasses import dataclass
 from typing import List, Dict, Tuple, Optional, Any

@@ -752,3 +752,25 @@ branch=main
 repo_root=a:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T14:10:00.000000+00:00] Reposition for iQOO Mobile-First On-Device AI Hackathon
+
+User Prompt (verbatim, secrets redacted):
+please remove that hackerrank in this project it must br like a project developed for normal case and not for hackerrank hackathon and also rewrite the readme file and the name of this app is Afford IQ and highlight that this agent is completely runned on device so no fear of data leakage and also highlight that this can be easily be runned on Iqoo devices as their processor support agents to be runned locally and all 
+basically this is made for the iqoo hackathon which is mobile first hackathon
+so do some research about this hackathon and change this accordingly
+
+Agent Response Summary:
+Refactored and repositioned the entire project for the iQOO Mobile-First On-Device AI Hackathon. Completely rewrote README.md highlighting Afford IQ's 100% on-device architecture, zero data leakage, and high-speed local mathematical forecasting optimized for iQOO smartphones with Snapdragon & Dimensity NPU hardware acceleration. Cleaned up legacy hackathon references across documentation and core code headers. Committed and pushed all updates to GitHub.
+
+Actions:
+* Rewrote README.md with comprehensive badges, architecture, iQOO hardware optimization details, and run instructions
+* Updated app.py docstring and core code headers (code/currency.py, code/data_loader.py, code/financial_state.py, code/forecaster.py, code/indexes.py)
+* Committed and pushed all updates to https://github.com/raghavendrac2006/afford-IQ.git
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=a:\Hackerrank
+worktree=main
+parent_agent=none

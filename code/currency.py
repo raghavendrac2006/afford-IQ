@@ -1,5 +1,5 @@
 """
-Currency Normalization Infrastructure for HackerRank Orchestrate: Buy or Wait?
+Currency Normalization Infrastructure for Afford IQ On-Device Financial Decision Agent
 Provides deterministic FX conversion using dataset/exchange_rates.csv.
 """
 from typing import Dict, Tuple, Optional, List
