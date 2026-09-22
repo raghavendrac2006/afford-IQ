@@ -724,3 +724,31 @@ branch=main
 repo_root=a:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T13:58:35.000000+00:00] GitHub Push and UI Human-Centric Refinements
+
+User Prompt (verbatim, secrets redacted):
+please push the code to this github repo 
+https://github.com/raghavendrac2006/afford-IQ.git
+and also please clarify me some doubts 
+firstly, why is the landing page not so good? Because it shows the target purchase check for a laptop: it is 40,000, and this must not be shown. The landing page is not returned. It's necessary for an APK app. Whenever he opens the app, that main dashboard must be opened, where he can see his profile, his monthly income, and all those things. This Launch Afford IQ button is not at all working. When I try to click over here, it is not showing. Once the app opens for the first time, it will ask to get started or sign in, something like that. Once he signs in, it must continue, but you have only added two screens. Please look into that.
+Now, coming to the dashboard, it looks very good and clean. Take out that badge beside that profile photo saying "On Device AI". That is not necessary. "Welcome back, good afternoon" and "Name" are local only. That badge, "local only", is not needed. "Save to spend today" is very good. The "Ask Afford IQ" instant check badge is not needed, and those suggestions are also not needed because each person has his own suggestions, his own mentality, and things to buy. Those suggestions are not needed. Just keep an example thing like "How much are you good to spend today?" or "How many days should I have to save to collect an amount of 10,000?" Something like that. Now, talking about the activity screen, here, the activity screen looks good. What are my total monthly spends and my recent activities over here? That is all good.
+Then, Ask IQ: this is also good, but I don't want those unnecessary badges saying neural engine and all. Please remove those unnecessary badges. This app must feel human-made, not AI-made. Okay?
+Receipt OCR, paste UPI, manual check: everything is good. Talking about privacy, this is also good, right? Could you please make these modifications
+
+Agent Response Summary:
+Removed robotic AI badges and technical buzzwords ('On-Device AI', 'Local Only', 'Instant Check', 'Neural Engine', 'Zero Cloud Telemetry') to give the app a clean, human-made feel. Redesigned the initial Welcome / Sign-in flow: removed the target laptop card from the landing page and created an intuitive profile sign-in flow that saves session state in localStorage, ensuring regular opens land directly on the Home Dashboard. Updated suggestion chips and example prompts to relatable human financial questions ('How much is safe to spend this weekend?', 'How many days to save ₹10,000?'). Initialized git repository, committed all files, and successfully pushed the full codebase to https://github.com/raghavendrac2006/afford-IQ.git.
+
+Actions:
+* Modified web/index.html (removed robotic AI badges, updated landing page and dashboard)
+* Modified web/app.js (implemented direct home screen launch for returning users, clean sign-in handler, and humanized query handlers)
+* Created .gitignore
+* Initialized Git repository and set remote to https://github.com/raghavendrac2006/afford-IQ.git
+* Committed all files and pushed successfully to main branch
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=a:\Hackerrank
+worktree=main
+parent_agent=none
