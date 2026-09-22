@@ -867,3 +867,23 @@ branch=main
 repo_root=A:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T21:05:00.000000+05:30] Fix vercel.json Schema Property
+
+User Prompt (verbatim, secrets redacted):
+Invalid request: should NOT have additional property `public`. Please remove it.
+iam not able to deploy this it says this error
+
+Agent Response Summary:
+Removed the obsolete `public` property from `vercel.json` to comply with the latest Vercel project configuration schema. Verified the JSON syntax and routing rules, committed the fix, and pushed immediately to GitHub main branch so the Vercel deployment proceeds cleanly without validation errors.
+
+Actions:
+* Modified `vercel.json` to remove invalid `public` and `version` fields, retaining clean SPA rewrite rules
+* Committed and pushed fix to https://github.com/raghavendrac2006/afford-IQ.git
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=A:\Hackerrank
+worktree=main
+parent_agent=none
