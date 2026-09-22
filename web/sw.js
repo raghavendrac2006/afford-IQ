@@ -1,40 +1,32 @@
-const CACHE_NAME = 'afford-iq-v1';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/app.js',
-  '/manifest.json',
-  '/assets/logo.png',
-  '/assets/avatar.png'
-];
+const CACHE_NAME = 'afford-iq-v3-clean';
 
+// On install, activate immediately
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
-  );
   self.skipWaiting();
 });
 
+// On activate, purge all old caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.map((key) => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
+// Network-First strategy: Always fetch fresh HTML & JS from server
 self.addEventListener('fetch', (event) => {
-  // Only cache GET requests that are not API calls
-  if (event.request.method === 'GET' && !event.request.url.includes('/api/')) {
-    event.respondWith(
-      caches.match(event.request).then((cachedResponse) => {
-        return cachedResponse || fetch(event.request);
+  if (event.request.method !== 'GET') return;
+  
+  event.respondWith(
+    fetch(event.request)
+      .then((networkResponse) => {
+        return networkResponse;
       })
-    );
-  }
+      .catch(() => {
+        return caches.match(event.request);
+      })
+  );
 });

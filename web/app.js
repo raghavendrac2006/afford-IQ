@@ -24,9 +24,18 @@ const state = {
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
+  // Purge old service worker caches for instant update
+  if ('caches' in window) {
+    caches.keys().then(names => {
+      for (let name of names) {
+        if (name !== 'afford-iq-v3-clean') caches.delete(name);
+      }
+    });
+  }
+
   // Register Service Worker for PWA
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration skipped:', err));
+    navigator.serviceWorker.register('/sw.js').then(reg => reg.update()).catch(err => console.log('SW update:', err));
   }
 
   // Setup Header Back Button Listener
