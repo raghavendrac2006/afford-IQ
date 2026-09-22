@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed-dim": "#ffb95f", "on-primary-fixed": "#0f0069", "on-primary-fixed-variant": "#3323cc", "secondary-fixed": "#6ffbbe", "surface-container-high": "#e2e7ff", "on-secondary-fixed-variant": "#005236", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "on-background": "#131b2e", "on-primary": "#ffffff", "on-error-container": "#93000a", "secondary-container": "#6cf8bb", "on-error": "#ffffff", "surface-tint": "#4d44e3", "tertiary-fixed": "#ffddb8", "surface-bright": "#faf8ff", "tertiary-container": "#885500", "primary-fixed-dim": "#c3c0ff", "secondary": "#006c49", "primary-container": "#4f46e5", "error-container": "#ffdad6", "on-primary-container": "#dad7ff", "on-tertiary-container": "#ffd4a4", "surface": "#faf8ff", "outline-variant": "#c7c4d8", "surface-container-lowest": "#ffffff", "surface-dim": "#d2d9f4", "surface-container-highest": "#dae2fd", "inverse-surface": "#283044", "outline": "#777587", "on-surface-variant": "#464555", "error": "#ba1a1a", "on-secondary-container": "#00714d", "tertiary": "#684000", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "surface-container": "#eaedff", "primary-fixed": "#e2dfff", "primary": "#3525cd", "on-secondary-fixed": "#002113", "on-tertiary-fixed": "#2a1700", "surface-container-low": "#f2f3ff", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed-dim": "#4edea3", "inverse-primary": "#c3c0ff", "background": "#faf8ff", "surface-variant": "#dae2fd" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem", "space-md": "1rem", "space-xl": "2rem" }, fontFamily: { "headline-sm": ["Plus Jakarta Sans"], "label-lg": ["Inter"], "currency-display": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Inter"], "display-hero": ["Plus Jakarta Sans"], "currency-md": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"] }, fontSize: { "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "currency-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Afford IQ Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNcHN_x88UabFVlwVgPI7kZ8gzmSPtX8pzE0ZeQ5t96--vOQ4Cmsxtt5B9THRFVtOLMnDMwYn8cY8yXNm4zYOwxl86rw7iasmchoeSdcb9qRcbX4c3zIycMuVBw5HlUmo_IkJi0AirYzbcu-JXyeW4lXc7FCNTEixwzGkvGhVD0eeOXa9aqqTx54-Ge-MXgIoQLkvfidIEVnG-MBnE-gwZtIjCHFalzqcp3eZ5fG1B85ldw4-X7UA"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate hidden sm:inline-block">Afford IQ</span><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate sm:hidden">Home</span></div><div class="flex items-center gap-space-xs bg-surface-container-high/60 px-2.5 py-1 rounded-full text-primary shadow-[0_1px_4px_rgba(79,70,229,0.08)] flex-shrink-0"><span class="material-symbols-outlined text-[16px] leading-none text-primary">verified_user</span><span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">On-Device AI</span></div><button aria-label="User Profile" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors flex-shrink-0"><img alt="Rahul's Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary/20 shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1VriY3UKi2mcPFaMBsPtoPdKEbJ0NhKK4Axl_DZyM5Z8VyAAPD3QfkRXxSnUzj-mrE-hCwEcmi5al_t5wFpMtoJEAjVDdGFg9oxeUcZjbEVYufLzbA1dworEq_8KXBhqtGTbhAl9fkpbr8TltCc9UvDDzoW7ddKHCGLoffe0na9voBfnIOJfoY3mfXe-KsDLDTiOitSlXK-HUACkCbXAcHl-0rcIMSwaeJHGWol0aq04qmPL9YeOKOZ-g"/></button></div></header><main class="flex flex-col relative w-full max-w-[480px] mx-auto pt-16 pb-24 px-margin bg-surface flex-1"><div class="flex flex-col w-full space-y-space-md"><!-- Header Greeting & Privacy Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Personal Vault · On-Device</span>
+<h1 class="font-headline-md text-headline-md text-on-surface flex items-center gap-1.5">
+      Good afternoon, Rahul
+      <span class="text-[18px]">✨</span>
+</h1>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-high text-primary px-3 py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[15px] leading-none text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-tight text-primary">Local Sandbox</span>
+</div>
+</div>
+<!-- SKEUOMORPHIC & GLASS HERO: Safe to Spend Today with Circular Ring Gauge -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-space-lg shadow-md border border-outline-variant/30">
+<!-- Ambient background lighting glow -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-container/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative flex flex-col space-y-space-md">
+<!-- Top meta badge row -->
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold tracking-wide uppercase shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+        Safe to Spend Today
+      </div>
+<div class="flex items-center gap-1.5 bg-secondary-fixed/30 px-3 py-1 rounded-full text-secondary font-label-sm text-label-sm font-semibold">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span>Safe Zone · 100% Intact</span>
+</div>
+</div>
+<!-- Central Circular Gauge & Amount Hero -->
+<div class="flex items-center justify-between gap-4 pt-1">
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Available Today</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-display-hero text-display-hero text-on-surface tracking-tight font-bold">₹8,450</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+          Calculated after locking <strong class="text-on-surface font-semibold">₹5,000</strong> rainy-day shield and <strong class="text-on-surface font-semibold">₹12,499</strong> bills.
+        </p>
+</div>
+<!-- Circular SVG Radial Runway Gauge -->
+<div class="relative w-24 h-24 flex items-center justify-center shrink-0">
+<svg class="w-24 h-24 -rotate-90" viewbox="0 0 96 96">
+<circle class="text-surface-container-high" cx="48" cy="48" fill="none" r="38" stroke="currentColor" stroke-width="8"></circle>
+<circle cx="48" cy="48" fill="none" r="38" stroke="#006c49" stroke-dasharray="238.76" stroke-dashoffset="59.69" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-currency-md text-currency-md font-bold text-secondary leading-none">75%</span>
+<span class="text-[10px] text-on-surface-variant font-medium mt-0.5 uppercase tracking-tighter">Liquid</span>
+</div>
+</div>
+</div>
+<!-- Symbolic Spending Runway Split Mini-Meters -->
+<div class="space-y-1.5 pt-1">
+<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant">
+<span class="font-medium">Daily Capacity Meter</span>
+<span class="text-secondary font-semibold">Optimal Pace</span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-high rounded-full overflow-hidden flex shadow-inner">
+<div class="h-full bg-secondary rounded-full w-2/3" title="Safe Liquid Balance"></div>
+<div class="h-full bg-primary-container/50 w-1/4 rounded-full ml-1" title="Committed Upcoming Bills"></div>
+<div class="h-full bg-tertiary-fixed-dim/80 w-1/12 rounded-full ml-1" title="Buffer Shield Locked"></div>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant pt-0.5">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary inline-block"></span> Free (₹8,450)</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container inline-block"></span> Bills (₹12,499)</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim inline-block"></span> Shield (₹5,000)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4 CORE COMPARATIVE SYMBOLIC METRICS GRID -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Metric 1: This Month's Spend -->
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<div class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold bg-primary-fixed/40 px-2 py-0.5 rounded-full">64% used</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate block">This Month's Spend</span>
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹12,840</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[64%]"></div>
+</div>
+</div>
+<!-- Metric 2: Last Month's Expenditure (Comparative Trend) -->
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<div class="w-7 h-7 rounded-lg bg-secondary-fixed/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold bg-secondary-container/40 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+<span>▼</span> 15.5%
+      </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate block">Last Month Spend</span>
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹15,200</span>
+</div>
+<span class="text-[11px] text-secondary font-medium">🟢 ₹2,360 less than last mo</span>
+</div>
+<!-- Metric 3: Wasted / Impulsive Spend (Leakage Warning) -->
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<div class="w-7 h-7 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-bold bg-tertiary-fixed/50 px-2 py-0.5 rounded-full">
+        14% Leak
+      </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate block">Wasted / Impulsive</span>
+<span class="font-currency-md text-currency-md text-tertiary font-bold">₹1,850</span>
+</div>
+<span class="text-[11px] text-tertiary-container font-medium">Avoidable night delivery &amp; subs</span>
+</div>
+<!-- Metric 4: Saved Budget / Buffer Stash Pool -->
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col justify-between space-y-2">
+<div class="flex items-center justify-between">
+<div class="w-7 h-7 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">lock_open</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold bg-secondary-fixed/40 px-2 py-0.5 rounded-full">
+        85% Safe
+      </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate block">Saved Buffer Stash</span>
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹17,150</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-[85%]"></div>
+</div>
+</div>
+</div>
+<!-- SYMBOLIC FINANCIAL PULSE / SPENDING SPEEDOMETER -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm space-y-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">speed</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Financial Pulse</h2>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-secondary text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+      Status: Healthy · Low Risk
+    </div>
+</div>
+<!-- Multi-Segment Visual Speedometer Bar -->
+<div class="space-y-1.5">
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden flex gap-0.5 p-0.5">
+<div class="h-full bg-primary rounded-l-full w-[20%]" title="Protected Buffer: ₹5,000"></div>
+<div class="h-full bg-surface-tint w-[45%]" title="Committed Bills: ₹12,499"></div>
+<div class="h-full bg-secondary w-[28%]" title="Safe Discretionary: ₹8,450"></div>
+<div class="h-full bg-tertiary-fixed-dim/90 rounded-r-full w-[7%]" title="Impulsive Leakage: ₹1,850"></div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-on-surface-variant font-medium px-1">
+<span class="text-primary font-semibold">₹5k Shield</span>
+<span class="text-surface-tint font-semibold">₹12.5k Bills</span>
+<span class="text-secondary font-semibold">₹8.45k Free</span>
+<span class="text-tertiary font-semibold">₹1.85k Leak</span>
+</div>
+</div>
+</div>
+<!-- Interactive AI Copilot Query Box -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm border border-outline-variant/30 space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Ask Afford IQ</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">Private Sandbox</span>
+</div>
+<!-- Interactive Prompt Input Capsule -->
+<div class="relative flex items-center w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 focus-within:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-primary text-[20px] mr-2">search_spark</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder-on-surface-variant/70 outline-none" id="afford-input" placeholder='Ask: "Can I afford a ₹4,500 watch?"' type="text"/>
+<div class="flex items-center gap-1.5 ml-2">
+<button aria-label="Voice Query" class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors active:scale-95" id="voice-btn">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<button aria-label="Calculate Affordability" class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-all active:scale-95 shadow-sm" id="ask-btn">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+</div>
+<!-- Dynamic Quick Prompt Chips (One-tap evaluate) -->
+<div class="flex gap-2 overflow-x-auto pb-1 pt-0.5 -mx-1 px-1 text-nowrap scrollbar-none">
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm hover:bg-primary-fixed hover:text-primary active:scale-95 transition-all flex items-center gap-1" onclick="fillQuery('Can I buy a ₹40,000 laptop on 6-mo EMI?')">
+<span>💻 ₹40k laptop EMI?</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm hover:bg-primary-fixed hover:text-primary active:scale-95 transition-all flex items-center gap-1" onclick="fillQuery('Can I spend ₹5,000 out today?')">
+<span>🎉 Spend ₹5,000 today?</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm hover:bg-primary-fixed hover:text-primary active:scale-95 transition-all flex items-center gap-1" onclick="fillQuery('Should I buy Sony noise-canceling headphones?')">
+<span>🎧 ₹18k Headphones?</span>
+</button>
+</div>
+<!-- Instant Verdict Drawer (Hidden until activated) -->
+<div class="hidden p-3 rounded-lg bg-surface-container-high transition-all" id="verdict-card">
+<div class="flex items-start justify-between">
+<div class="flex gap-2.5">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface font-semibold" id="verdict-title">Affordable with safe headroom</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="verdict-desc">Leaves ₹3,450 free daily budget after next week's ₹8,000 rent clearance.</div>
+</div>
+</div>
+<button aria-label="Dismiss" class="text-on-surface-variant hover:text-on-surface" onclick="closeVerdict()">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Smart Contextual Delight Insight -->
+<div class="flex items-center gap-3 p-3.5 rounded-xl bg-tertiary-fixed/40 text-on-tertiary-fixed shadow-sm border border-outline-variant/30">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-body-sm text-body-sm leading-snug">
+<strong class="font-semibold">Smart saving:</strong> You spent <span class="font-semibold text-secondary">15.5% less</span> than last month. Avoidable leakage dropped by <strong class="font-semibold text-on-tertiary-fixed">₹420</strong> this week!
+    </p>
+</div>
+</div>
+<!-- Upcoming Commitments Section -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Upcoming commitments</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">(14 Days)</span>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline">Manage</button>
+</div>
+<div class="space-y-2">
+<!-- Commitment Item 1 -->
+<div class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow transition-shadow border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Apartment Rent</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Due in 8 days · Sep 30</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹8,000</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-0.5 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Auto-reserved
+        </span>
+</div>
+</div>
+<!-- Commitment Item 2 -->
+<div class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow transition-shadow border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">subscriptions</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Netflix &amp; Spotify Duo</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Due tomorrow · Sep 18</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹499</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Auto-debit UPI</span>
+</div>
+</div>
+<!-- Commitment Item 3 -->
+<div class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow transition-shadow border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">two_wheeler</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Ather Bike EMI</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Due Oct 2</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-bold">₹2,500</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Upcoming</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Auto-detected Telemetry Activity Feed -->
+<div class="space-y-space-sm pb-2">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Recent Activity</h2>
+<div class="flex items-center gap-1 bg-primary-fixed text-primary px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]">bolt</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">SMS Auto-Detected</span>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline">All</button>
+</div>
+<div class="space-y-2">
+<!-- Activity 1 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[18px]">local_cafe</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-on-surface font-medium truncate">Sri Lakshmi Stores</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Food &amp; Chai · Today 1:05 PM</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-semibold">-₹30</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/50 px-1.5 py-0.2 rounded font-medium">Auto</span>
+</div>
+</div>
+<!-- Activity 2 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[18px]">moped</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-on-surface font-medium truncate">Rapido Auto</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Transport · Today 12:40 PM</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-semibold">-₹120</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/50 px-1.5 py-0.2 rounded font-medium">Auto</span>
+</div>
+</div>
+<!-- Activity 3 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface shrink-0">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-label-lg text-on-surface font-medium truncate">Netflix India</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Subscription · Yesterday</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface font-semibold">-₹299</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/50 px-1.5 py-0.2 rounded font-medium">Auto</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function fillQuery(text) {
+    const input = document.getElementById('afford-input');
+    input.value = text;
+    input.focus();
+    simulateAffordVerdict(text);
+  }
+
+  function simulateAffordVerdict(query) {
+    const verdict = document.getElementById('verdict-card');
+    const title = document.getElementById('verdict-title');
+    const desc = document.getElementById('verdict-desc');
+    
+    verdict.classList.remove('hidden');
+    
+    if (query.includes('40,000') || query.includes('40k')) {
+      title.innerText = 'High Risk · Will breach safety buffer';
+      title.className = 'font-label-lg text-label-lg text-error font-semibold';
+      desc.innerText = '₹40k exceeds total liquid balance (₹25,949). A ₹6,666/mo EMI reduces your cushion below ₹5,000.';
+    } else if (query.includes('5,000')) {
+      title.innerText = 'Comfortably Safe · ₹3,450 remains';
+      title.className = 'font-label-lg text-label-lg text-secondary font-semibold';
+      desc.innerText = 'Fits today\'s ₹8,450 allowance. Your ₹8,000 rent due on Sep 30 stays completely protected.';
+    } else {
+      title.innerText = 'Moderate Stretch · Consider Waiting';
+      title.className = 'font-label-lg text-label-lg text-tertiary-container font-semibold';
+      desc.innerText = 'Buying this week lowers your disposable runway to ₹450 before the next stipend arrival.';
+    }
+  }
+
+  function closeVerdict() {
+    document.getElementById('verdict-card').classList.add('hidden');
+  }
+
+  document.getElementById('ask-btn').addEventListener('click', () => {
+    const val = document.getElementById('afford-input').value;
+    if (val.trim()) {
+      simulateAffordVerdict(val);
+    }
+  });
+
+  document.getElementById('voice-btn').addEventListener('click', () => {
+    const input = document.getElementById('afford-input');
+    input.placeholder = "Listening locally...";
+    setTimeout(() => {
+      fillQuery("Can I spend ₹5,000 today?");
+    }, 1200);
+  });
+</script></div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(19,27,46,0.04)]" data-active-classes="text-primary font-semibold"><div class="max-w-[480px] mx-auto h-16 px-space-xs flex items-center justify-around"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[48px] transition-colors text-primary font-semibold" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[48px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="ask" href="#"><div class="flex items-center justify-center w-10 h-7 rounded-full bg-primary/10 text-primary mb-0.5"><span class="material-symbols-outlined text-[20px]">spark</span></div><span class="font-label-sm text-label-sm">Ask</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[48px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="activity" href="#"><span class="material-symbols-outlined text-[24px]">receipt_long</span><span class="font-label-sm text-label-sm mt-0.5">Activity</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[48px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="privacy-vault" href="#"><span class="material-symbols-outlined text-[24px]">shield_lock</span><span class="font-label-sm text-label-sm mt-0.5">Privacy</span></a></div><div class="flex justify-center pb-1.5 pt-0.5"><div class="w-32 h-1 bg-on-surface/20 rounded-full"></div></div></nav></body></html>

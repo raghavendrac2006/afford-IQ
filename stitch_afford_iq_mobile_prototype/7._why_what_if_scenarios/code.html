@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed-dim": "#ffb95f", "on-primary-fixed": "#0f0069", "on-primary-fixed-variant": "#3323cc", "secondary-fixed": "#6ffbbe", "surface-container-high": "#e2e7ff", "on-secondary-fixed-variant": "#005236", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "on-background": "#131b2e", "on-primary": "#ffffff", "on-error-container": "#93000a", "secondary-container": "#6cf8bb", "on-error": "#ffffff", "surface-tint": "#4d44e3", "tertiary-fixed": "#ffddb8", "surface-bright": "#faf8ff", "tertiary-container": "#885500", "primary-fixed-dim": "#c3c0ff", "secondary": "#006c49", "primary-container": "#4f46e5", "error-container": "#ffdad6", "on-primary-container": "#dad7ff", "on-tertiary-container": "#ffd4a4", "surface": "#faf8ff", "outline-variant": "#c7c4d8", "surface-container-lowest": "#ffffff", "surface-dim": "#d2d9f4", "surface-container-highest": "#dae2fd", "inverse-surface": "#283044", "outline": "#777587", "on-surface-variant": "#464555", "error": "#ba1a1a", "on-secondary-container": "#00714d", "tertiary": "#684000", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "surface-container": "#eaedff", "primary-fixed": "#e2dfff", "primary": "#3525cd", "on-secondary-fixed": "#002113", "on-tertiary-fixed": "#2a1700", "surface-container-low": "#f2f3ff", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed-dim": "#4edea3", "inverse-primary": "#c3c0ff", "background": "#faf8ff", "surface-variant": "#dae2fd" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem", "space-md": "1rem", "space-xl": "2rem" }, fontFamily: { "headline-sm": ["Plus Jakarta Sans"], "label-lg": ["Inter"], "currency-display": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "body-md": ["Inter"], "display-hero": ["Plus Jakarta Sans"], "currency-md": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"] }, fontSize: { "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "currency-display": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display-hero": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "currency-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs min-w-0 flex-1"><button aria-label="Back" class="w-11 h-11 -ml-2 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-full transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Afford IQ Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNcHN_x88UabFVlwVgPI7kZ8gzmSPtX8pzE0ZeQ5t96--vOQ4Cmsxtt5B9THRFVtOLMnDMwYn8cY8yXNm4zYOwxl86rw7iasmchoeSdcb9qRcbX4c3zIycMuVBw5HlUmo_IkJi0AirYzbcu-JXyeW4lXc7FCNTEixwzGkvGhVD0eeOXa9aqqTx54-Ge-MXgIoQLkvfidIEVnG-MBnE-gwZtIjCHFalzqcp3eZ5fG1B85ldw4-X7UA"/><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate ml-1">Purchase Check</h1></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 bg-surface-container-high/60 px-2 py-0.5 rounded-full text-primary shadow-[0_1px_4px_rgba(79,70,229,0.08)] flex-shrink-0"><span class="material-symbols-outlined text-[14px] leading-none text-primary">lock</span><span class="font-label-sm text-label-sm text-primary font-semibold">Local Only</span></div><button aria-label="User Profile" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors flex-shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC550lHPFyHl_eVL46_nNpW8JS9w4IdrsHui0tu6pQiZKas5_c3Lw93XAdc53f-xKskHVzpd_qbWTvx7XLBio-nRGEl2GfCFwRadixmx4Z5Z8TR6LY30AR4Kk0hxlDdwO02umUHKyXJVioAaD4YA8c9AgDiuKUdtNoDx_VHPttIVvh1-PnPTAZPVFifM5cdn-WAa3Jo5yS3OFEUHpG-wT8y4yFy2obGSRpGw-ahrZITDgKsic1j4QY"/></button></div></div></header><main class="flex flex-col relative w-full max-w-[480px] mx-auto pt-16 pb-8 px-margin bg-surface flex-1"><div class="flex flex-col w-full pb-20">
+<!-- Privacy & Context Bar -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs bg-surface-container-high/80 px-3 py-1 rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wide uppercase text-primary">Simulated on phone</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span class="font-label-sm text-label-sm">Zero Cloud Sync</span>
+</div>
+</div>
+<!-- Hero Decision Summary Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm mb-space-md relative overflow-hidden">
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-tertiary font-label-sm text-label-sm mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+          Recommendation: Wait 19 Days
+        </div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Target Purchase Breakdown</h2>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[26px]">laptop_mac</span>
+</div>
+</div>
+<!-- Runway / Progress Gauge -->
+<div class="space-y-1.5 mt-space-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Ready today vs Target Gap</span>
+<span class="font-label-md text-label-md font-semibold text-primary">₹8,450 / ₹40,000</span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 21%;"></div>
+<div class="h-full bg-primary-fixed-dim/60" style="width: 79%;"></div>
+</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm text-on-surface-variant pt-0.5">
+<span>Current safe pool (21%)</span>
+<span class="text-error font-medium">₹31,550 gap</span>
+</div>
+</div>
+</div>
+<!-- Section 1: Why Wait? (Deconstructed Reasoning) -->
+<section class="space-y-space-sm mb-space-lg">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology_alt</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Why Wait?</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4-Factor Engine</span>
+</div>
+<!-- Reasoning Stack (Zero-border, tonal elevation) -->
+<div class="space-y-2">
+<!-- Metric 1: Commitments -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">calendar_clock</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-lg text-label-lg text-on-surface truncate">Upcoming commitments</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Rent, bike EMI, subscriptions</p>
+</div>
+</div>
+<div class="text-right flex-shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface block">₹12,499</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Due in 14 days</span>
+</div>
+</div>
+<!-- Metric 2: Safety buffer -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">umbrella</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-lg text-label-lg text-on-surface truncate">Safety buffer to protect</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Rainy day untouchable pool</p>
+</div>
+</div>
+<div class="text-right flex-shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-secondary block">₹5,000</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Locked Safe</span>
+</div>
+</div>
+<!-- Metric 3: Current safe-to-spend -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/40 flex items-center justify-center text-on-secondary-fixed-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-lg text-label-lg text-on-surface truncate">Current safe-to-spend</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Safe liquid balance today</p>
+</div>
+</div>
+<div class="text-right flex-shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface block">₹8,450</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Available now</span>
+</div>
+</div>
+<!-- Metric 4: Target laptop price & gap -->
+<div class="bg-surface-container-high/40 rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">shopping_bag</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-lg text-label-lg text-on-surface truncate">Target laptop price</p>
+<p class="font-body-sm text-body-sm text-error font-medium truncate">Shortfall gap: ₹31,550</p>
+</div>
+</div>
+<div class="text-right flex-shrink-0 pl-2">
+<span class="font-currency-md text-currency-md text-on-surface block">₹40,000</span>
+<span class="font-label-sm text-label-sm text-error font-semibold">-₹31,550 needed</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: What If? Interactive Scenarios -->
+<section class="space-y-space-sm mb-space-lg">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">What If? Scenarios</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Tap to simulate</span>
+</div>
+<!-- Scenario Card 1: Safest baseline -->
+<div class="scenario-card cursor-pointer bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-200 ring-2 ring-transparent hover:shadow-md relative overflow-hidden" onclick="selectScenario(this, 's1')">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold">
+              Safest · 0% stress
+            </span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Wait until Oct 18</h4>
+</div>
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary radio-check">
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Wait for next stipend/salary credit without changing any daily spending habits or cutting chai/food runs.
+      </p>
+<div class="mt-3 flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-secondary">savings</span>
+<span>Stipend projected: <strong class="text-on-surface">₹35,000 on Oct 17</strong></span>
+</div>
+</div>
+<!-- Scenario Card 2: Cut Discretionary Spend (Interactive Slider) -->
+<div class="scenario-card cursor-pointer bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-200 hover:shadow-md relative overflow-hidden" onclick="selectScenario(this, 's2')">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="min-w-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold mb-1">
+            Buy 8 days earlier (Oct 10)
+          </span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Trim discretionary spend</h4>
+</div>
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary radio-check">
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+        Paring down weekend dining and quick impulse orders accelerates your target timeline.
+      </p>
+<!-- Micro Slider Control -->
+<div class="bg-surface-container-low rounded-xl p-3 space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekly Cut Target:</span>
+<span class="font-currency-md text-currency-md text-primary" id="sliderValueText">₹1,500/wk</span>
+</div>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" id="trimSlider" max="3500" min="500" oninput="updateSliderOutput(event)" step="250" type="range" value="1500"/>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>₹500/wk (Oct 15)</span>
+<span class="text-primary font-semibold" id="targetSimDate">Accelerates to Oct 10</span>
+<span>₹3,500/wk (Oct 02)</span>
+</div>
+</div>
+</div>
+<!-- Scenario Card 3: Alternative Specs -->
+<div class="scenario-card cursor-pointer bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-200 hover:shadow-md relative overflow-hidden" onclick="selectScenario(this, 's3')">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="min-w-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold mb-1">
+            Affordable on Oct 4
+          </span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Choose ₹30,000 alternative</h4>
+</div>
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary radio-check">
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+        Meets 90% of your student workflow requirements (Figma, VS Code, Notion, light multitasking).
+      </p>
+<div class="flex items-center gap-3 bg-surface-container-low p-2.5 rounded-xl">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</div>
+<div class="min-w-0 flex-1">
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Refurb M1 Air / Ryzen 5 Slim</p>
+<p class="font-body-sm text-body-sm text-secondary truncate">Saves ₹10,000 instantly</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</div>
+</div>
+<!-- Scenario Card 4: Structured Installments (No-cost EMI) -->
+<div class="scenario-card cursor-pointer bg-surface-container-lowest rounded-2xl p-space-md shadow-sm transition-all duration-200 hover:shadow-md relative overflow-hidden" onclick="selectScenario(this, 's4')">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="min-w-0">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary-fixed text-tertiary font-label-sm text-label-sm font-semibold mb-1">
+            No-cost EMI option
+          </span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">₹3,600/month for 12 months</h4>
+</div>
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-primary radio-check">
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-2">
+        Zero interest financing via college student card or pre-approved bank credit.
+      </p>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-low px-3 py-2 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+<span>Requires <strong class="text-on-surface">₹3,600 monthly runway margin</strong>. Feasible.</span>
+</div>
+</div>
+</section>
+<!-- Interactive Simulation Callout Banner -->
+<div class="bg-primary-fixed/30 rounded-2xl p-space-md mb-space-lg flex items-center gap-space-sm" id="simulationBanner">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+</div>
+<div class="min-w-0 flex-1">
+<h5 class="font-label-lg text-label-lg text-on-surface">Live Scenario Feedback</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="scenarioFeedbackText">Select a scenario above to test cash runway impact.</p>
+</div>
+</div>
+<!-- Primary CTA Action -->
+<div class="space-y-space-sm">
+<button class="w-full h-[52px] bg-primary text-on-primary rounded-xl font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-transform">
+<span>Compare Payment Plans</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="font-body-sm text-body-sm text-center text-on-surface-variant flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+      Simulations never share banking SMS or data off your phone
+    </p>
+</div>
+<!-- Bottom Navigation Dock (Active on 'Ask' / Simulation tab) -->
+<div class="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto bg-surface/90 backdrop-blur-xl border-t-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] pb-safe z-40">
+<div class="h-16 px-space-md flex items-center justify-around">
+<!-- Tab 1: Check -->
+<a class="flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors flex-1 py-1" href="#">
+<span class="material-symbols-outlined text-[22px]">price_check</span>
+<span class="font-label-sm text-label-sm">Check</span>
+</a>
+<!-- Tab 2: Activity -->
+<a class="flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors flex-1 py-1" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+<span class="font-label-sm text-label-sm">Activity</span>
+</a>
+<!-- Tab 3: Ask / Simulator (ACTIVE) -->
+<a class="flex flex-col items-center justify-center gap-0.5 text-primary flex-1 py-1 relative" href="#">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-label-sm text-label-sm font-semibold">Ask</span>
+<div class="w-1 h-1 rounded-full bg-primary mt-0.5"></div>
+</a>
+<!-- Tab 4: Vault -->
+<a class="flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-primary transition-colors flex-1 py-1" href="#">
+<span class="material-symbols-outlined text-[22px]">shield</span>
+<span class="font-label-sm text-label-sm">Vault</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  let activeScenarioId = null;
+
+  function selectScenario(element, id) {
+    // Reset all cards
+    document.querySelectorAll('.scenario-card').forEach(card => {
+      card.classList.remove('ring-2', 'ring-primary-container', 'bg-surface-container-low');
+      card.classList.add('bg-surface-container-lowest');
+      const radio = card.querySelector('.radio-check');
+      if (radio) {
+        radio.innerHTML = '<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>';
+        radio.classList.remove('bg-primary', 'text-on-primary');
+        radio.classList.add('bg-surface-container', 'text-primary');
+      }
+    });
+
+    // Mark current
+    element.classList.remove('bg-surface-container-lowest');
+    element.classList.add('ring-2', 'ring-primary-container', 'bg-surface-container-low');
+    const curRadio = element.querySelector('.radio-check');
+    if (curRadio) {
+      curRadio.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span>';
+      curRadio.classList.remove('bg-surface-container', 'text-primary');
+      curRadio.classList.add('bg-primary', 'text-on-primary');
+    }
+
+    activeScenarioId = id;
+    const bannerText = document.getElementById('scenarioFeedbackText');
+
+    if (id === 's1') {
+      bannerText.innerHTML = '<strong>Oct 18</strong> preserves your full ₹5,000 emergency buffer and avoids end-of-month panic.';
+    } else if (id === 's2') {
+      bannerText.innerHTML = 'Trimming discretionary spend moves delivery up to <strong>Oct 10</strong> while protecting rent.';
+    } else if (id === 's3') {
+      bannerText.innerHTML = 'Switching to ₹30,000 alternative makes purchase safe on <strong>Oct 4</strong> without waiting for salary.';
+    } else if (id === 's4') {
+      bannerText.innerHTML = '12M EMI keeps your immediate liquidity at <strong>₹4,850</strong> today with zero emergency fund breach.';
+    }
+  }
+
+  function updateSliderOutput(e) {
+    e.stopPropagation();
+    const val = parseInt(e.target.value, 10);
+    const textElem = document.getElementById('sliderValueText');
+    const dateElem = document.getElementById('targetSimDate');
+    textElem.innerText = '₹' + val.toLocaleString('en-IN') + '/wk';
+
+    let daysEarlier = Math.round((val / 3500) * 16);
+    let targetDay = Math.max(1, 18 - daysEarlier);
+    let dateStr = 'Oct ' + (targetDay < 10 ? '0' + targetDay : targetDay);
+    
+    dateElem.innerText = 'Accelerates to ' + dateStr;
+    const feedback = document.getElementById('scenarioFeedbackText');
+    if (activeScenarioId === 's2') {
+      feedback.innerHTML = 'Saving <strong>₹' + val.toLocaleString('en-IN') + '/wk</strong> lets you purchase on <strong>' + dateStr + '</strong> safely.';
+    }
+  }
+
+  // Pre-select Scenario 1 as default on load
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstCard = document.querySelector('.scenario-card');
+    if (firstCard) {
+      selectScenario(firstCard, 's1');
+    }
+  });
+</script></main><footer class="w-full pb-safe flex justify-center"><div class="w-32 h-1 bg-on-surface/20 rounded-full mb-1"></div></footer></body></html>

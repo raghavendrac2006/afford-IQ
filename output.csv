@@ -1,0 +1,251 @@
+request_id,amount_safe_to_pay,affordability_status,recommended_payment_method,payment_plan,earliest_date_for_full_payment,spending_changes_needed,decision_explanation
+request_26,15656000,affordable_now,full_payment,2025-08-03:15656000,2025-08-03,none,Full payment of 15656000 on 2025-08-03 is safe.
+request_27,6670,affordable_now,full_payment,2026-07-05:6670,2026-07-05,none,Full payment of 6670 on 2026-07-05 is safe.
+request_28,281.89,affordable_later,wait,2024-08-15:1302.40,2024-08-15,none,Pay 1302.40 in full on 2024-08-15.
+request_29,51524,affordable_now,full_payment,2025-11-04:51524,2025-11-04,none,Full payment of 51524 on 2025-11-04 is safe.
+request_30,775.20,affordable_with_plan,installments,2026-04-06:268.74|2026-05-06:268.74|2026-06-05:268.74,2026-04-06,none,Use 3 payment(s) of 268.74 starting 2026-04-06.
+request_31,3231140.74,affordable_later,wait,2024-11-15:18164000,2024-11-15,none,Pay 18164000 in full on 2024-11-15.
+request_32,14175.20,affordable_later,wait,2025-04-15:40018,2025-04-15,none,Pay 40018 in full on 2025-04-15.
+request_33,37707.32,affordable_later,wait,2026-02-15:118000,2026-02-15,none,Pay 118000 in full on 2026-02-15.
+request_34,129400,affordable_now,full_payment,2024-12-04:129400,2024-12-04,none,Full payment of 129400 on 2024-12-04 is safe.
+request_35,25159.95,affordable_later,wait,2026-01-15:212000,2026-01-15,none,Pay 212000 in full on 2026-01-15.
+request_36,615.13,affordable_later,wait,2026-09-15:3954,2026-09-15,none,Pay 3954 in full on 2026-09-15.
+request_37,4880085.52,affordable_later,wait,2024-05-15:14649000,2024-05-15,none,Pay 14649000 in full on 2024-05-15.
+request_38,142.86,affordable_later,wait,2025-10-15:971.30,2025-10-15,none,Pay 971.30 in full on 2025-10-15.
+request_39,29898,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_40,332.46,affordable_later,wait,2024-08-15:1290.30,2024-08-15,none,Pay 1290.30 in full on 2024-08-15.
+request_41,10155278.23,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_42,52100,affordable_now,full_payment,2026-01-05:52100,2026-01-05,none,Full payment of 52100 on 2026-01-05 is safe.
+request_43,8443757.75,affordable_later,wait,2024-11-15:43339000,2024-11-15,none,Pay 43339000 in full on 2024-11-15.
+request_44,31333.86,affordable_later,wait,2025-04-15:95800,2025-04-15,none,Pay 95800 in full on 2025-04-15.
+request_45,3614476.62,affordable_later,wait,2026-09-15:21983000,2026-09-15,none,Pay 21983000 in full on 2026-09-15.
+request_46,39927,affordable_with_plan,partial_payment,2024-12-03:39927|2024-12-03:9523,2024-12-03,none,Pay 39927 today and remaining 9523 on 2024-12-03.
+request_47,38114000,affordable_now,full_payment,2025-05-05:38114000,2025-05-05,none,Full payment of 38114000 on 2025-05-05 is safe.
+request_48,45700,affordable_now,full_payment,2026-07-25:45700,2026-07-25,none,Full payment of 45700 on 2026-07-25 is safe.
+request_49,11974188.05,affordable_with_plan,installments,2024-03-18:11902106.67|2024-04-18:11902106.67|2024-05-19:11902106.67,2024-05-15,none,Use 3 payment(s) of 11902106.67 starting 2024-03-18.
+request_50,43900,affordable_now,full_payment,2025-08-06:43900,2025-08-06,none,Full payment of 43900 on 2025-08-06 is safe.
+request_51,2191000,affordable_now,full_payment,2026-01-03:2191000,2026-01-03,none,Full payment of 2191000 on 2026-01-03 is safe.
+request_52,18701.97,affordable_later,wait,2024-06-15:28870,2024-06-15,none,Pay 28870 in full on 2024-06-15.
+request_53,477.89,affordable_later,wait,2026-01-15:1699.20,2026-01-15,none,Pay 1699.20 in full on 2026-01-15.
+request_54,377.72,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_55,125909.04,affordable_with_plan,installments,2026-06-11:75781.33|2026-07-12:75781.33|2026-08-12:75781.33,2026-07-15,none,Use 3 payment(s) of 75781.33 starting 2026-06-11.
+request_56,623.64,affordable_with_plan,partial_payment,2025-02-03:623.64|2025-02-15:257.92,2025-02-15,none,Pay 623.64 today and remaining 257.92 on 2025-02-15.
+request_57,12657.18,affordable_later,wait,2026-06-15:61446,2026-06-15,none,Pay 61446 in full on 2026-06-15.
+request_58,16226000,affordable_now,full_payment,2024-12-07:16226000,2024-12-07,none,Full payment of 16226000 on 2024-12-07 is safe.
+request_59,140600,affordable_with_plan,installments,2025-05-07:48741.33|2025-06-04:48741.33|2025-07-02:48741.33,2025-05-04,none,Use 3 payment(s) of 48741.33 starting 2025-05-07.
+request_60,130.33,affordable_later,wait,2026-01-15:199.89,2026-01-15,none,Pay 199.89 in full on 2026-01-15.
+request_61,29062,affordable_with_plan,installments,2024-03-17:10074.83|2024-04-17:10074.83|2024-05-18:10074.83,2024-03-03,none,Use 3 payment(s) of 10074.83 starting 2024-03-17.
+request_62,404.23,affordable_now,full_payment,2025-08-05:404.23,2025-08-05,none,Full payment of 404.23 on 2025-08-05 is safe.
+request_63,43711.12,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_64,0,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_65,5782.77,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_66,22200,affordable_now,full_payment,2026-04-03:22200,2026-04-03,none,Full payment of 22200 on 2026-04-03 is safe.
+request_67,362.92,affordable_later,wait,2024-11-15:2094,2024-11-15,none,Pay 2094 in full on 2024-11-15.
+request_68,1455.49,affordable_with_plan,installments,2025-02-14:725.09|2025-03-14:725.09|2025-04-11:725.09,2025-03-15,none,Use 3 payment(s) of 725.09 starting 2025-02-14.
+request_69,529.10,affordable_now,full_payment,2026-01-04:529.10,2026-01-04,none,Full payment of 529.10 on 2026-01-04 is safe.
+request_70,49475.42,affordable_later,wait,2025-02-15:243900,2025-02-15,none,Pay 243900 in full on 2025-02-15.
+request_71,0,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_72,11330,affordable_now,full_payment,2026-07-05:11330,2026-07-05,none,Full payment of 11330 on 2026-07-05 is safe.
+request_73,67912.41,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_74,5010,affordable_now,full_payment,2025-08-04:5010,2025-08-04,none,Full payment of 5010 on 2025-08-04 is safe.
+request_75,4455.22,affordable_later,wait,2026-04-06:28270,2026-04-06,none,Pay 28270 in full on 2026-04-06.
+request_76,626.24,affordable_later,wait,2024-06-21:4455.60,2024-06-21,none,Pay 4455.60 in full on 2024-06-21.
+request_77,60700,affordable_now,full_payment,2025-11-05:60700,2025-11-05,none,Full payment of 60700 on 2025-11-05 is safe.
+request_78,45861.07,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_79,146.17,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_80,112545.10,affordable_later,wait,2025-02-07:217500,2025-02-07,none,Pay 217500 in full on 2025-02-07.
+request_81,2069.69,affordable_with_plan,full_payment,2026-07-03:2076,2026-07-03,stop:event_7569,Apply spending changes (stop:event_7569) then pay 2076 in full on 2026-07-03.
+request_82,341.88,affordable_later,wait,2025-02-15:1405.20,2025-02-15,none,Pay 1405.20 in full on 2025-02-15.
+request_83,5361.57,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_84,33932.12,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_85,374061.81,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_86,43870.22,affordable_with_plan,full_payment,2025-08-03:46300,2025-08-03,stop:event_8083|reduce_to:event_8084:2360,Apply spending changes (stop:event_8083|reduce_to:event_8084:2360) then pay 46300 in full on 2025-08-03.
+request_87,3811.12,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_88,10497.62,affordable_with_plan,installments,2024-06-14:9045.23|2024-07-15:9045.23|2024-08-15:9045.23,2024-07-15,none,Use 3 payment(s) of 9045.23 starting 2024-06-14.
+request_89,9226703.57,affordable_with_plan,installments,2025-11-18:4768746.67|2025-12-16:4768746.67|2026-01-13:4768746.67,2026-01-15,none,Use 3 payment(s) of 4768746.67 starting 2025-11-18.
+request_90,2560,affordable_now,full_payment,2026-07-06:2560,2026-07-06,none,Full payment of 2560 on 2026-07-06 is safe.
+request_91,574.91,affordable_later,wait,2024-11-15:1927.20,2024-11-15,none,Pay 1927.20 in full on 2024-11-15.
+request_92,34034,affordable_now,full_payment,2025-02-05:34034,2025-02-05,none,Full payment of 34034 on 2025-02-05 is safe.
+request_93,1729.20,affordable_now,full_payment,2026-04-07:1729.20,2026-04-07,none,Full payment of 1729.20 on 2026-04-07 is safe.
+request_94,572,affordable_now,full_payment,2024-12-04:572,2024-12-04,none,Full payment of 572 on 2024-12-04 is safe.
+request_95,22583.50,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_96,73002.33,affordable_with_plan,installments,2026-01-10:31269.33|2026-02-09:31269.33|2026-03-11:31269.33,2026-02-15,none,Use 3 payment(s) of 31269.33 starting 2026-01-10.
+request_97,1833.87,affordable_later,wait,2024-04-15:23496,2024-04-15,none,Pay 23496 in full on 2024-04-15.
+request_98,1706.35,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_99,13624.16,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_100,25888.98,affordable_with_plan,installments,2024-06-13:12866.19|2024-07-14:12866.19|2024-08-14:12866.19,2024-07-15,none,Use 3 payment(s) of 12866.19 starting 2024-06-13.
+request_101,143500,affordable_now,full_payment,2025-11-03:143500,2025-11-03,none,Full payment of 143500 on 2025-11-03 is safe.
+request_102,1716,affordable_with_plan,installments,2026-04-05:594.88|2026-05-05:594.88|2026-06-04:594.88,2026-04-05,none,Use 3 payment(s) of 594.88 starting 2026-04-05.
+request_103,2506.26,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_104,17204,affordable_now,full_payment,2025-02-04:17204,2025-02-04,none,Full payment of 17204 on 2025-02-04 is safe.
+request_105,53168.01,affordable_with_plan,full_payment,2026-06-08:53500,2026-06-08,reduce_to:event_9721:1720,Apply spending changes (reduce_to:event_9721:1720) then pay 53500 in full on 2026-06-08.
+request_106,440.12,affordable_later,wait,2025-01-15:2207.70,2025-01-15,none,Pay 2207.70 in full on 2025-01-15.
+request_107,2461.45,affordable_with_plan,installments,2025-05-08:878.59|2025-06-05:878.59|2025-07-03:878.59,2025-05-15,none,Use 3 payment(s) of 878.59 starting 2025-05-08.
+request_108,2317.45,affordable_later,wait,2026-07-22:55308,2026-07-22,none,Pay 55308 in full on 2026-07-22.
+request_109,594.98,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_110,22352,affordable_with_plan,installments,2025-08-06:7748.69|2025-09-03:7748.69|2025-10-01:7748.69,2025-08-06,none,Use 3 payment(s) of 7748.69 starting 2025-08-06.
+request_111,16625000,affordable_now,full_payment,2026-04-03:16625000,2026-04-03,none,Full payment of 16625000 on 2026-04-03 is safe.
+request_112,271.70,affordable_now,full_payment,2024-06-05:271.70,2024-06-05,none,Full payment of 271.70 on 2024-06-05 is safe.
+request_113,27871.82,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_114,47789.20,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_115,14552.20,affordable_later,wait,2024-11-15:80500,2024-11-15,none,Pay 80500 in full on 2024-11-15.
+request_116,4650.43,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_117,848.69,affordable_with_plan,full_payment,2026-07-05:880,2026-07-15,stop:event_10833|reduce_to:event_10878:20.50,Apply spending changes (stop:event_10833|reduce_to:event_10878:20.50) then pay 880 in full on 2026-07-05.
+request_118,648.21,affordable_with_plan,installments,2024-12-07:255.87|2025-01-07:255.87|2025-02-07:255.87,2024-12-15,none,Use 3 payment(s) of 255.87 starting 2024-12-07.
+request_119,49775.04,affordable_later,wait,2025-07-15:203500,2025-07-15,none,Pay 203500 in full on 2025-07-15.
+request_120,7714000,affordable_now,full_payment,2026-04-06:7714000,2026-04-06,none,Full payment of 7714000 on 2026-04-06 is safe.
+request_121,633.60,affordable_now,full_payment,2024-03-03:633.60,2024-03-03,none,Full payment of 633.60 on 2024-03-03 is safe.
+request_122,20558000,affordable_with_plan,installments,2025-08-05:7126773.33|2025-09-02:7126773.33|2025-09-30:7126773.33,2025-08-05,none,Use 3 payment(s) of 7126773.33 starting 2025-08-05.
+request_123,4076000,affordable_now,full_payment,2026-01-07:4076000,2026-01-07,none,Full payment of 4076000 on 2026-01-07 is safe.
+request_124,1406.49,affordable_with_plan,installments,2024-06-11:1076.12|2024-07-12:1076.12|2024-08-12:1076.12,2024-07-15,none,Use 3 payment(s) of 1076.12 starting 2024-06-11.
+request_125,6058.96,affordable_with_plan,full_payment,2025-11-06:6468,2025-12-07,stop:event_11519|reduce_to:event_11602:223.30,Apply spending changes (stop:event_11519|reduce_to:event_11602:223.30) then pay 6468 in full on 2025-11-06.
+request_126,159600,affordable_now,full_payment,2026-07-03:159600,2026-07-03,none,Full payment of 159600 on 2026-07-03 is safe.
+request_127,9363.78,affordable_later,wait,2024-10-15:23980,2024-10-15,none,Pay 23980 in full on 2024-10-15.
+request_128,25168,affordable_now,full_payment,2025-02-07:25168,2025-02-07,none,Full payment of 25168 on 2025-02-07 is safe.
+request_129,110.47,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_130,388.44,affordable_later,wait,2025-02-15:1978.80,2025-02-15,none,Pay 1978.80 in full on 2025-02-15.
+request_131,1230.12,affordable_with_plan,installments,2025-05-06:643.14|2025-06-03:643.14|2025-07-01:643.14,2025-06-15,none,Use 3 payment(s) of 643.14 starting 2025-05-06.
+request_132,304.83,affordable_later,wait,2026-01-15:379.86,2026-01-15,none,Pay 379.86 in full on 2026-01-15.
+request_133,15770000,affordable_later,wait,2024-03-07:15770000,2024-03-07,none,Pay 15770000 in full on 2024-03-07.
+request_134,4920350.21,affordable_later,wait,2025-10-15:21831000,2025-10-15,none,Pay 21831000 in full on 2025-10-15.
+request_135,230.38,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_136,496.37,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_137,24928.90,affordable_later,wait,2026-01-15:80100,2026-01-15,none,Pay 80100 in full on 2026-01-15.
+request_138,632.94,affordable_with_plan,partial_payment,2026-04-07:632.94|2026-04-15:624,2026-04-15,none,Pay 632.94 today and remaining 624 on 2026-04-15.
+request_139,1414.07,affordable_with_plan,installments,2024-09-07:802.88|2024-10-08:802.88|2024-11-08:802.88,2024-09-15,none,Use 3 payment(s) of 802.88 starting 2024-09-07.
+request_140,1622.98,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_141,24028.98,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_142,1263.60,affordable_now,full_payment,2024-12-05:1263.60,2024-12-05,none,Full payment of 1263.60 on 2024-12-05 is safe.
+request_143,2749.04,affordable_later,wait,2025-07-15:12584,2025-07-15,none,Pay 12584 in full on 2025-07-15.
+request_144,224.01,affordable_with_plan,full_payment,2026-07-04:233.34,2026-07-04,stop:event_13239|stop:event_13240,Apply spending changes (stop:event_13239|stop:event_13240) then pay 233.34 in full on 2026-07-04.
+request_145,24072.18,affordable_later,wait,2024-05-15:217400,2024-05-15,none,Pay 217400 in full on 2024-05-15.
+request_146,2825.77,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_147,375.74,affordable_with_plan,installments,2026-04-08:391.63|2026-05-08:391.63|2026-06-07:391.63,2026-05-15,none,Use 3 payment(s) of 391.63 starting 2026-04-08.
+request_148,7665.48,affordable_later,wait,2024-07-15:22242,2024-07-15,none,Pay 22242 in full on 2024-07-15.
+request_149,22713.22,affordable_with_plan,installments,2025-11-18:12706.03|2025-12-16:12706.03|2026-01-13:12706.03,2025-12-15,none,Use 3 payment(s) of 12706.03 starting 2025-11-18.
+request_150,192.54,affordable_with_plan,installments,2026-01-06:171.98|2026-02-05:171.98|2026-03-07:171.98,2026-03-15,none,Use 3 payment(s) of 171.98 starting 2026-01-06.
+request_151,26999000,affordable_now,full_payment,2024-09-03:26999000,2024-09-03,none,Full payment of 26999000 on 2024-09-03 is safe.
+request_152,11035.96,affordable_with_plan,installments,2025-02-12:4812.43|2025-03-12:4812.43|2025-04-09:4812.43,2025-04-14,none,Use 3 payment(s) of 4812.43 starting 2025-02-12.
+request_153,83.94,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_154,1625.80,affordable_with_plan,installments,2024-12-04:563.61|2025-01-04:563.61|2025-02-04:563.61,2024-12-04,none,Use 3 payment(s) of 563.61 starting 2024-12-04.
+request_155,112500,affordable_now,full_payment,2025-05-06:112500,2025-05-06,none,Full payment of 112500 on 2025-05-06 is safe.
+request_156,7717.86,affordable_later,wait,2026-06-15:43076,2026-06-15,none,Pay 43076 in full on 2026-06-15.
+request_157,4352610.76,affordable_later,wait,2024-05-15:23503000,2024-05-15,none,Pay 23503000 in full on 2024-05-15.
+request_158,242600,affordable_with_plan,installments,2025-08-07:84101.33|2025-09-04:84101.33|2025-10-02:84101.33,2025-08-07,none,Use 3 payment(s) of 84101.33 starting 2025-08-07.
+request_159,13398,affordable_now,full_payment,2026-01-04:13398,2026-01-04,none,Full payment of 13398 on 2026-01-04 is safe.
+request_160,574.47,affordable_with_plan,installments,2024-06-13:432.05|2024-07-14:432.05|2024-08-14:432.05,2024-07-15,none,Use 3 payment(s) of 432.05 starting 2024-06-13.
+request_161,5909658.01,affordable_later,wait,2026-01-15:21204000,2026-01-15,none,Pay 21204000 in full on 2026-01-15.
+request_162,182711.51,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_163,8854069.69,affordable_with_plan,installments,2024-09-10:6692053.33|2024-10-11:6692053.33|2024-11-11:6692053.33,2024-11-15,none,Use 3 payment(s) of 6692053.33 starting 2024-09-10.
+request_164,27018000,affordable_with_plan,installments,2025-02-11:9366240|2025-03-11:9366240|2025-04-08:9366240,2025-02-04,none,Use 3 payment(s) of 9366240 starting 2025-02-11.
+request_165,80600,affordable_now,full_payment,2026-04-06:80600,2026-04-06,none,Full payment of 80600 on 2026-04-06 is safe.
+request_166,2907.60,affordable_with_plan,installments,2024-12-03:1007.97|2025-01-03:1007.97|2025-02-03:1007.97,2024-12-03,none,Use 3 payment(s) of 1007.97 starting 2024-12-03.
+request_167,43802,affordable_now,full_payment,2025-05-05:43802,2025-05-05,none,Full payment of 43802 on 2025-05-05 is safe.
+request_168,28721.68,affordable_with_plan,partial_payment,2026-01-07:28721.68|2026-02-15:20658.32,2026-02-15,none,Pay 28721.68 today and remaining 20658.32 on 2026-02-15.
+request_169,41976,affordable_now,full_payment,2024-03-04:41976,2024-03-04,none,Full payment of 41976 on 2024-03-04 is safe.
+request_170,30745775.62,affordable_with_plan,installments,2025-08-06:12804480|2025-09-03:12804480|2025-10-01:12804480,2025-09-15,none,Use 3 payment(s) of 12804480 starting 2025-08-06.
+request_171,0,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_172,9598.68,affordable_with_plan,partial_payment,2024-06-05:9598.68|2024-06-05:601.32,2024-06-05,none,Pay 9598.68 today and remaining 601.32 on 2024-06-05.
+request_173,57877.88,affordable_with_plan,installments,2025-11-21:39173.33|2025-12-19:39173.33|2026-01-16:39173.33,2026-01-18,none,Use 3 payment(s) of 39173.33 starting 2025-11-21.
+request_174,871.61,affordable_with_plan,installments,2026-04-04:397.35|2026-05-04:397.35|2026-06-03:397.35,2026-04-04,none,Use 3 payment(s) of 397.35 starting 2026-04-04.
+request_175,2346.30,affordable_now,full_payment,2024-09-06:2346.30,2024-09-06,none,Full payment of 2346.30 on 2024-09-06 is safe.
+request_176,350.63,affordable_later,wait,2025-02-21:1239.70,2025-02-21,none,Pay 1239.70 in full on 2025-02-21.
+request_177,1017.60,affordable_now,full_payment,2026-01-05:1017.60,2026-01-05,none,Full payment of 1017.60 on 2026-01-05 is safe.
+request_178,2938.10,affordable_with_plan,installments,2024-12-07:1018.54|2025-01-07:1018.54|2025-02-07:1018.54,2024-12-07,none,Use 3 payment(s) of 1018.54 starting 2024-12-07.
+request_179,7416741.63,affordable_later,wait,2025-07-15:41648000,2025-07-15,none,Pay 41648000 in full on 2025-07-15.
+request_180,66500,affordable_now,full_payment,2026-07-06:66500,2026-07-06,none,Full payment of 66500 on 2026-07-06 is safe.
+request_181,288.33,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_182,65714,affordable_now,full_payment,2025-08-05:65714,2025-08-05,none,Full payment of 65714 on 2025-08-05 is safe.
+request_183,23623785.30,affordable_with_plan,installments,2026-04-10:9313546.67|2026-05-10:9313546.67|2026-06-09:9313546.67,2026-06-19,none,Use 3 payment(s) of 9313546.67 starting 2026-04-10.
+request_184,11631.75,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_185,318.41,affordable_later,wait,2026-01-15:1257.30,2026-01-15,none,Pay 1257.30 in full on 2026-01-15.
+request_186,1858.93,affordable_later,wait,2026-03-15:26554,2026-03-15,none,Pay 26554 in full on 2026-03-15.
+request_187,38384.36,affordable_later,wait,2024-11-15:187500,2024-11-15,none,Pay 187500 in full on 2024-11-15.
+request_188,85.46,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_189,488.40,affordable_now,full_payment,2026-07-04:488.40,2026-07-04,none,Full payment of 488.40 on 2026-07-04 is safe.
+request_190,518.39,affordable_later,wait,2025-02-15:2557.50,2025-02-15,none,Pay 2557.50 in full on 2025-02-15.
+request_191,664.40,affordable_now,full_payment,2025-05-03:664.40,2025-05-03,none,Full payment of 664.40 on 2025-05-03 is safe.
+request_192,168.89,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_193,23.01,affordable_later,wait,2024-05-15:1212.20,2024-05-15,none,Pay 1212.20 in full on 2024-05-15.
+request_194,40302.80,affordable_later,wait,2025-10-15:132800,2025-10-15,none,Pay 132800 in full on 2025-10-15.
+request_195,938.83,affordable_with_plan,installments,2026-01-09:405.74|2026-02-08:405.74|2026-03-10:405.74,2026-02-15,none,Use 3 payment(s) of 405.74 starting 2026-01-09.
+request_196,762.30,affordable_now,full_payment,2024-06-03:762.30,2024-06-03,none,Full payment of 762.30 on 2024-06-03 is safe.
+request_197,50939000,affordable_with_plan,installments,2025-11-19:17658853.33|2025-12-17:17658853.33|2026-01-14:17658853.33,2025-11-05,none,Use 3 payment(s) of 17658853.33 starting 2025-11-19.
+request_198,185800,affordable_now,full_payment,2026-07-07:185800,2026-07-07,none,Full payment of 185800 on 2026-07-07 is safe.
+request_199,23674000,affordable_with_plan,installments,2024-09-07:8206986.67|2024-10-08:8206986.67|2024-11-08:8206986.67,2024-09-04,none,Use 3 payment(s) of 8206986.67 starting 2024-09-07.
+request_200,21717000,affordable_now,full_payment,2025-02-06:21717000,2025-02-06,none,Full payment of 21717000 on 2025-02-06 is safe.
+request_201,23997000,affordable_now,full_payment,2026-04-03:23997000,2026-04-03,none,Full payment of 23997000 on 2026-04-03 is safe.
+request_202,123900,affordable_now,full_payment,2024-12-05:123900,2024-12-05,none,Full payment of 123900 on 2024-12-05 is safe.
+request_203,1442.10,affordable_with_plan,installments,2025-05-10:499.93|2025-06-07:499.93|2025-07-05:499.93,2025-05-07,none,Use 3 payment(s) of 499.93 starting 2025-05-10.
+request_204,521.63,affordable_later,wait,2026-01-04:588.74,2026-01-04,none,Pay 588.74 in full on 2026-01-04.
+request_205,10621000,affordable_now,full_payment,2024-03-06:10621000,2024-03-06,none,Full payment of 10621000 on 2024-03-06 is safe.
+request_206,1404.70,affordable_with_plan,installments,2025-08-03:486.96|2025-08-31:486.96|2025-09-28:486.96,2025-08-03,none,Use 3 payment(s) of 486.96 starting 2025-08-03.
+request_207,3230.93,affordable_later,wait,2026-07-15:11830,2026-07-15,none,Pay 11830 in full on 2026-07-15.
+request_208,3104179.08,affordable_later,wait,2024-06-15:4413000,2024-06-15,none,Pay 4413000 in full on 2024-06-15.
+request_209,1808.74,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_210,669.88,affordable_with_plan,partial_payment,2026-04-06:669.88|2026-04-15:690.14,2026-04-15,none,Pay 669.88 today and remaining 690.14 on 2026-04-15.
+request_211,336.42,affordable_later,wait,2024-11-15:1788.60,2024-11-15,none,Pay 1788.60 in full on 2024-11-15.
+request_212,5431241.08,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_213,3362.40,affordable_with_plan,installments,2026-01-21:1165.63|2026-02-20:1165.63|2026-03-22:1165.63,2026-01-07,none,Use 3 payment(s) of 1165.63 starting 2026-01-21.
+request_214,34304.63,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_215,29986,affordable_with_plan,installments,2025-05-09:10395.15|2025-06-06:10395.15|2025-07-04:10395.15,2025-05-06,none,Use 3 payment(s) of 10395.15 starting 2025-05-09.
+request_216,472.13,affordable_later,wait,2026-09-15:3332.40,2026-09-15,none,Pay 3332.40 in full on 2026-09-15.
+request_217,19686.45,affordable_with_plan,installments,2024-03-19:12889.07|2024-04-19:12889.07|2024-05-20:12889.07,2024-05-15,none,Use 3 payment(s) of 12889.07 starting 2024-03-19.
+request_218,21566814.51,affordable_with_plan,installments,2025-08-07:21195893.33|2025-09-04:21195893.33|2025-10-02:21195893.33,2025-09-15,none,Use 3 payment(s) of 21195893.33 starting 2025-08-07.
+request_219,601.52,affordable_with_plan,installments,2026-04-07:580.01|2026-05-07:580.01|2026-06-06:580.01,2026-04-15,none,Use 3 payment(s) of 580.01 starting 2026-04-07.
+request_220,50.71,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_221,109800,affordable_now,full_payment,2025-11-03:109800,2025-11-03,none,Full payment of 109800 on 2025-11-03 is safe.
+request_222,34078,affordable_now,full_payment,2026-01-05:34078,2026-01-05,none,Full payment of 34078 on 2026-01-05 is safe.
+request_223,898.70,affordable_now,full_payment,2024-09-07:898.70,2024-09-07,none,Full payment of 898.70 on 2024-09-07 is safe.
+request_224,10327000,affordable_with_plan,installments,2025-02-04:5370040|2025-03-04:5370040,2025-02-04,none,Use 2 payment(s) of 5370040 starting 2025-02-04.
+request_225,9380382.41,affordable_with_plan,installments,2026-07-20:7647120|2026-08-19:7647120|2026-09-18:7647120,2026-09-15,none,Use 3 payment(s) of 7647120 starting 2026-07-20.
+request_226,157000,affordable_now,full_payment,2024-12-03:157000,2024-12-03,none,Full payment of 157000 on 2024-12-03 is safe.
+request_227,4376.52,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_228,1327679.29,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_229,500.25,affordable_later,wait,2024-05-15:1526.80,2024-05-15,none,Pay 1526.80 in full on 2024-05-15.
+request_230,3537.60,affordable_now,full_payment,2025-08-06:3537.60,2025-08-06,none,Full payment of 3537.60 on 2025-08-06 is safe.
+request_231,29620.24,affordable_with_plan,installments,2026-01-06:12378.08|2026-02-05:12378.08|2026-03-07:12378.08,2026-03-15,none,Use 3 payment(s) of 12378.08 starting 2026-01-06.
+request_232,617.24,affordable_later,wait,2024-08-15:1970.10,2024-08-15,none,Pay 1970.10 in full on 2024-08-15.
+request_233,3535851.67,affordable_with_plan,partial_payment,2025-11-07:3535851.67|2025-12-15:2705148.33,2025-12-15,none,Pay 3535851.67 today and remaining 2705148.33 on 2025-12-15.
+request_234,151.77,affordable_later,wait,2026-09-15:1213.30,2026-09-15,none,Pay 1213.30 in full on 2026-09-15.
+request_235,967.20,affordable_now,full_payment,2024-09-06:967.20,2024-09-06,none,Full payment of 967.20 on 2024-09-06 is safe.
+request_236,6081340.68,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_237,23826000,affordable_now,full_payment,2026-04-05:23826000,2026-04-05,none,Full payment of 23826000 on 2026-04-05 is safe.
+request_238,663.60,affordable_with_plan,installments,2024-12-07:230.05|2025-01-07:230.05|2025-02-07:230.05,2024-12-07,none,Use 3 payment(s) of 230.05 starting 2024-12-07.
+request_239,642,affordable_now,full_payment,2025-05-04:642,2025-05-04,none,Full payment of 642 on 2025-05-04 is safe.
+request_240,14534.05,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_241,21052000,affordable_with_plan,installments,2024-03-17:7298026.67|2024-04-17:7298026.67|2024-05-18:7298026.67,2024-03-03,none,Use 3 payment(s) of 7298026.67 starting 2024-03-17.
+request_242,55.24,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_243,17468,affordable_now,full_payment,2026-07-07:17468,2026-07-07,none,Full payment of 17468 on 2026-07-07 is safe.
+request_244,49918,affordable_now,full_payment,2024-06-04:49918,2024-06-04,none,Full payment of 49918 on 2024-06-04 is safe.
+request_245,29194.88,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_246,64086,affordable_with_plan,installments,2026-04-03:22216.48|2026-05-03:22216.48|2026-06-02:22216.48,2026-04-03,none,Use 3 payment(s) of 22216.48 starting 2026-04-03.
+request_247,1059.30,affordable_now,full_payment,2024-09-05:1059.30,2024-09-05,none,Full payment of 1059.30 on 2024-09-05 is safe.
+request_248,929.02,affordable_with_plan,partial_payment,2025-02-07:929.02|2025-03-07:1036.58,2025-03-07,none,Pay 929.02 today and remaining 1036.58 on 2025-03-07.
+request_249,163.67,affordable_later,wait,2026-03-15:643.20,2026-03-15,none,Pay 643.20 in full on 2026-03-15.
+request_250,16056.71,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_251,1513.60,affordable_later,wait,2025-05-03:1513.60,2025-05-03,none,Pay 1513.60 in full on 2025-05-03.
+request_252,3553677.74,affordable_later,wait,2026-09-15:28082000,2026-09-15,none,Pay 28082000 in full on 2026-09-15.
+request_253,1383.13,affordable_with_plan,installments,2024-03-21:984.60|2024-04-21:984.60|2024-05-22:984.60,2024-05-15,none,Use 3 payment(s) of 984.60 starting 2024-03-21.
+request_254,383.35,affordable_later,wait,2025-10-15:3535.20,2025-10-15,none,Pay 3535.20 in full on 2025-10-15.
+request_255,0,affordable_later,wait,2026-04-06:3345000,2026-04-06,none,Pay 3345000 in full on 2026-04-06.
+request_256,150837.08,affordable_with_plan,installments,2024-06-10:75816|2024-07-11:75816|2024-08-11:75816,2024-07-15,none,Use 3 payment(s) of 75816 starting 2024-06-10.
+request_257,467.42,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_258,1113.60,affordable_now,full_payment,2026-01-07:1113.60,2026-01-07,none,Full payment of 1113.60 on 2026-01-07 is safe.
+request_259,251.54,affordable_later,wait,2024-10-15:935,2024-10-15,none,Pay 935 in full on 2024-10-15.
+request_260,6999559.35,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_261,1830.40,affordable_now,full_payment,2026-07-03:1830.40,2026-07-03,none,Full payment of 1830.40 on 2026-07-03 is safe.
+request_262,9236000,affordable_now,full_payment,2024-12-05:9236000,2024-12-05,none,Full payment of 9236000 on 2024-12-05 is safe.
+request_263,6129,not_affordable,not_recommended,none,,none,Do not proceed with request. None of the available options keeps minimum balance protected.
+request_264,23012.52,affordable_later,wait,2026-06-15:111300,2026-06-15,none,Pay 111300 in full on 2026-06-15.
+request_265,45970,affordable_now,full_payment,2024-03-06:45970,2024-03-06,none,Full payment of 45970 on 2024-03-06 is safe.
+request_266,770.18,affordable_with_plan,installments,2025-08-03:324.13|2025-08-31:324.13|2025-09-28:324.13,2025-08-03,none,Use 3 payment(s) of 324.13 starting 2025-08-03.
+request_267,1557.72,affordable_with_plan,installments,2026-01-08:667.33|2026-02-07:667.33|2026-03-09:667.33,2026-03-18,none,Use 3 payment(s) of 667.33 starting 2026-01-08.
+request_268,1061.93,affordable_with_plan,installments,2024-06-14:841.22|2024-07-15:841.22|2024-08-15:841.22,2024-07-15,none,Use 3 payment(s) of 841.22 starting 2024-06-14.
+request_269,9664.79,affordable_later,wait,2025-12-15:15490,2025-12-15,none,Pay 15490 in full on 2025-12-15.
+request_270,14.45,affordable_later,wait,2026-08-10:3028.80,2026-08-10,none,Pay 3028.80 in full on 2026-08-10.
+request_271,18130.39,affordable_later,wait,2024-11-15:91300,2024-11-15,none,Pay 91300 in full on 2024-11-15.
+request_272,5420361.49,affordable_with_plan,installments,2025-02-12:4709466.67|2025-03-12:4709466.67|2025-04-09:4709466.67,2025-03-15,none,Use 3 payment(s) of 4709466.67 starting 2025-02-12.
+request_273,9476871.09,affordable_with_plan,partial_payment,2026-04-07:9476871.09|2026-04-15:6384128.91,2026-04-15,none,Pay 9476871.09 today and remaining 6384128.91 on 2026-04-15.
+request_274,1960.33,affordable_with_plan,installments,2024-12-04:940.75|2025-01-04:940.75|2025-02-04:940.75,2025-02-12,none,Use 3 payment(s) of 940.75 starting 2024-12-04.
+request_275,15884000,affordable_now,full_payment,2025-05-06:15884000,2025-05-06,none,Full payment of 15884000 on 2025-05-06 is safe.
