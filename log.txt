@@ -797,3 +797,50 @@ branch=main
 repo_root=a:\Hackerrank
 worktree=main
 parent_agent=none
+
+## [2026-09-22T20:41:00.000000+05:30] Goal Accelerator Implementation & Integration
+
+User Prompt (verbatim, secrets redacted):
+# AFFORD IQ — IMPLEMENT GOAL ACCELERATOR
+
+I already have the Afford IQ application and existing financial decision engine in this repository. Inspect the existing project first and preserve the current affordability logic/UI unless changes are necessary.
+
+I want to add a new flagship feature called:
+
+## GOAL ACCELERATOR
+
+Purpose:
+The user tells Afford IQ a financial goal, target amount, and target date. Afford IQ analyzes the user's current financial behavior and calculates a realistic contribution plan. It should not simply say "save ₹50,000." It should break the target into manageable daily/weekly/monthly contributions and continuously adjust the plan based on actual spending behavior.
+
+Example:
+Goal: Laptop
+Target: ₹50,000
+Timeline: 12 months
+
+The system should calculate:
+- Required amount with no growth
+- Required daily contribution
+- Required weekly contribution
+- Required monthly contribution
+- Current spending capacity
+- Whether the goal is realistic
+- Expected progress
+- Shortfall/surplus
+- Updated contribution required if spending changes
+
+Agent Response Summary:
+Built and fully integrated the flagship Goal Accelerator engine and mobile UI into Afford IQ without regressing any existing affordability engine logic. Implemented GoalEngine in code/goal_engine.py with daily/weekly/monthly contribution breakdowns, cash flow surplus feasibility analysis, dynamic course correction recalculations (monthly increase, date extension, discretionary spending trims), and 4 educational growth scenarios with risk/liquidity ratings. Added dedicated Goals Dashboard, Goal Creation flow, and interactive Goal Strategy screens in web/index.html and web/app.js with real-time slider controls and full test coverage.
+
+Actions:
+* Created `code/goal_engine.py` with GoalEngine, contribution breakdowns, feasibility logic, dynamic recalculation, and SIP compounding scenarios
+* Updated `app.py` with `/api/goals`, `/api/goals/calculate`, `/api/goals/adjust`, and `/api/goals/simulate` endpoints
+* Updated `web/index.html` with Goals navigation, Home Goals preview card, Goals Dashboard (`screen-goals`), Goal Creation (`screen-goal-create`), and Goal Strategy Detail (`screen-goal-detail`)
+* Updated `web/app.js` with client controller methods, live real-time recalculation, dynamic adjustment simulation sandbox, and local goal management
+* Verified all unit tests and backend endpoints passing with 100% accuracy
+
+Context:
+tool=Google Antigravity
+branch=main
+repo_root=A:\Hackerrank
+worktree=main
+parent_agent=none

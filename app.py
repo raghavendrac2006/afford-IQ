@@ -28,6 +28,7 @@ from currency import CurrencyConverter
 from image_resolver import ImageResolver
 from safe_amount_engine import SafeAmountEngine
 from optimizer import PaymentPlanOptimizer
+from goal_engine import GoalEngine
 from models import Request, FinancialProfile, FinancialEvent, PaymentOption, Message
 
 # Initialize data and engine
@@ -45,6 +46,7 @@ currency_converter = CurrencyConverter(rates_list)
 image_resolver = ImageResolver(dataset_dir, images_list)
 safe_engine = SafeAmountEngine(currency_converter, image_resolver)
 optimizer = PaymentPlanOptimizer(currency_converter, image_resolver)
+goal_engine = GoalEngine()
 
 # In-memory user state & settings (defaults to Rahul / user_01)
 current_user_id = "user_01"
@@ -58,6 +60,55 @@ user_custom_settings = {
     "on_device_ai": True,
     "home_currency": "INR"
 }
+
+# In-memory Goals state
+demo_goals = [
+    {
+        "goal_id": "goal_01",
+        "name": "MacBook Pro / Laptop",
+        "category": "Device",
+        "target_amount": 50000.0,
+        "current_saved": 32000.0,
+        "target_date": "2027-06-30",
+        "created_date": "2026-06-30",
+        "monthly_contribution": 4167.0,
+        "current_avg_contribution": 3750.0,
+        "status": "at_risk",
+        "icon": "laptop_mac",
+        "color": "primary",
+        "notes": "Target for engineering and design workstation."
+    },
+    {
+        "goal_id": "goal_02",
+        "name": "Emergency Shield Reserve",
+        "category": "Emergency",
+        "target_amount": 30000.0,
+        "current_saved": 12000.0,
+        "target_date": "2027-12-31",
+        "created_date": "2026-01-01",
+        "monthly_contribution": 1200.0,
+        "current_avg_contribution": 1500.0,
+        "status": "on_track",
+        "icon": "shield",
+        "color": "secondary",
+        "notes": "Dedicated 6-month rainy day untouchable liquidity buffer."
+    },
+    {
+        "goal_id": "goal_03",
+        "name": "Goa Vacation Trip",
+        "category": "Travel",
+        "target_amount": 25000.0,
+        "current_saved": 15000.0,
+        "target_date": "2027-03-31",
+        "created_date": "2026-08-01",
+        "monthly_contribution": 1667.0,
+        "current_avg_contribution": 1800.0,
+        "status": "ahead",
+        "icon": "flight",
+        "color": "tertiary",
+        "notes": "Trip with university friends after semester exams."
+    }
+]
 
 def parse_amount_from_query(text: str) -> float:
     """Extract numeric monetary amount from text query."""
@@ -461,6 +512,10 @@ class AffordIQRequestHandler(BaseHTTPRequestHandler):
             self.send_json(users)
             return
 
+        elif path == "/api/goals":
+            self.send_json(demo_goals)
+            return
+
         # Serve static web files
         web_dir = os.path.join(repo_root, "web")
         req_file = path.lstrip("/")
@@ -518,6 +573,106 @@ class AffordIQRequestHandler(BaseHTTPRequestHandler):
                 if k in user_custom_settings:
                     user_custom_settings[k] = v
             self.send_json({"status": "success", "settings": user_custom_settings})
+            return
+
+        elif path == "/api/goals/calculate":
+            target_amount = float(payload.get("target_amount", 50000.0))
+            current_saved = float(payload.get("current_saved", 0.0))
+            target_date = payload.get("target_date", "2027-06-30")
+            monthly_income = float(user_custom_settings.get("monthly_income", 35000.0))
+            essential_commitments = 12499.0
+            buffer_shield = float(user_custom_settings.get("minimum_balance", 5000.0))
+
+            plan_result = goal_engine.calculate_plan(
+                target_amount=target_amount,
+                current_saved=current_saved,
+                target_date_str=target_date,
+                monthly_income=monthly_income,
+                essential_commitments=essential_commitments,
+                buffer_shield=buffer_shield
+            )
+            self.send_json(plan_result)
+            return
+
+        elif path == "/api/goals/adjust":
+            target_amount = float(payload.get("target_amount", 50000.0))
+            current_saved = float(payload.get("current_saved", 32000.0))
+            target_date = payload.get("target_date", "2027-06-30")
+            behind_amount = float(payload.get("behind_amount", 1200.0))
+            current_pace = float(payload.get("current_pace", 3750.0))
+
+            adjust_result = goal_engine.recalculate_dynamic_adjustment(
+                target_amount=target_amount,
+                current_saved=current_saved,
+                target_date_str=target_date,
+                behind_amount=behind_amount,
+                current_monthly_pace=current_pace
+            )
+            self.send_json(adjust_result)
+            return
+
+        elif path == "/api/goals":
+            # Add or update goal
+            goal_id = payload.get("goal_id")
+            if not goal_id:
+                goal_id = f"goal_{len(demo_goals) + 1:02d}_{int(datetime.now().timestamp())}"
+                new_goal = {
+                    "goal_id": goal_id,
+                    "name": payload.get("name", "New Financial Goal"),
+                    "category": payload.get("category", "General"),
+                    "target_amount": float(payload.get("target_amount", 50000.0)),
+                    "current_saved": float(payload.get("current_saved", 0.0)),
+                    "target_date": payload.get("target_date", "2027-06-30"),
+                    "created_date": datetime.now().strftime("%Y-%m-%d"),
+                    "monthly_contribution": float(payload.get("monthly_contribution", 4167.0)),
+                    "current_avg_contribution": float(payload.get("current_avg_contribution", payload.get("monthly_contribution", 4167.0))),
+                    "status": payload.get("status", "on_track"),
+                    "icon": payload.get("icon", "flag"),
+                    "color": payload.get("color", "primary"),
+                    "notes": payload.get("notes", "")
+                }
+                demo_goals.insert(0, new_goal)
+                self.send_json({"status": "created", "goal": new_goal})
+            else:
+                for g in demo_goals:
+                    if g["goal_id"] == goal_id:
+                        g.update(payload)
+                        self.send_json({"status": "updated", "goal": g})
+                        return
+                self.send_json({"status": "error", "message": "Goal not found"})
+            return
+
+        elif path == "/api/goals/simulate":
+            # Simulate a changed pace / spending shortfall
+            goal_id = payload.get("goal_id", "goal_01")
+            new_status = payload.get("status", "at_risk")
+            lag_amount = float(payload.get("lag_amount", 1200.0))
+            for g in demo_goals:
+                if g["goal_id"] == goal_id:
+                    g["status"] = new_status
+                    if new_status == "at_risk":
+                        g["current_avg_contribution"] = max(500.0, g["monthly_contribution"] - (lag_amount / 4.0))
+                    elif new_status == "on_track":
+                        g["current_avg_contribution"] = g["monthly_contribution"]
+                    self.send_json({"status": "simulated", "goal": g})
+                    return
+            self.send_json({"status": "error", "message": "Goal not found"})
+            return
+
+        self.send_response(404)
+        self.end_headers()
+        self.wfile.write(b"404 Not Found")
+
+    def do_DELETE(self):
+        parsed = urlparse(self.path)
+        path = parsed.path
+        query = parse_qs(parsed.query)
+
+        if path == "/api/goals":
+            goal_id = query.get("goal_id", [None])[0]
+            global demo_goals
+            demo_goals = [g for g in demo_goals if g["goal_id"] != goal_id]
+            self.send_json({"status": "deleted", "goals": demo_goals})
             return
 
         self.send_response(404)

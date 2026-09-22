@@ -2,7 +2,7 @@
  * Afford IQ · Financial Decision Assistant
  * Frontend Application Controller
  * Handles SPA navigation, real financial engine integration, user sign-in flow,
- * transaction activities, natural language queries, and payment plan selection.
+ * transaction activities, natural language queries, Goal Accelerator, and payment plan selection.
  */
 
 // Application State
@@ -14,6 +14,11 @@ const state = {
   transactions: [],
   commitments: [],
   allUsers: [],
+  goals: [],
+  currentGoalId: 'goal_01',
+  currentGoal: null,
+  selectedGoalCategory: 'Device',
+  livePlanCalculation: null,
   currentQuery: 'Can I buy a ₹40,000 laptop next month?',
   evaluationResult: null,
   selectedPlanType: 'recommended',
@@ -44,11 +49,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     backBtn.addEventListener('click', handleBackNavigation);
   }
 
+  // Set default target date for goal create (12 months from today)
+  const goalDateInput = document.getElementById('new-goal-date');
+  if (goalDateInput) {
+    const d = new Date();
+    d.setFullYear(d.getFullYear() + 1);
+    goalDateInput.value = d.toISOString().split('T')[0];
+  }
+
   // Load backend data
   await loadDatasetUsers();
   await loadUserProfile(state.userId);
   await loadTransactions(state.userId);
   await loadCommitments(state.userId);
+  await loadGoals();
 
   // Check if user has already signed in / configured profile
   const userSignedIn = localStorage.getItem('afford_iq_user_signed_in');
@@ -124,6 +138,13 @@ function navigateTo(screenId, pushHistory = true) {
   }
   state.currentScreen = screenId;
 
+  // Screen-specific triggers
+  if (screenId === 'goals') {
+    renderGoalsDashboard();
+  } else if (screenId === 'goal-create') {
+    triggerLiveGoalCalculation();
+  }
+
   updateNavigationUI(screenId);
 }
 
@@ -166,6 +187,21 @@ function updateNavigationUI(screenId) {
       if (backBtn) backBtn.classList.add('hidden');
       if (title) title.textContent = 'Afford IQ';
       highlightBottomNav('nav-home');
+      break;
+    case 'goals':
+      if (backBtn) backBtn.classList.remove('hidden');
+      if (title) title.textContent = 'Goal Accelerator';
+      highlightBottomNav('nav-goals');
+      break;
+    case 'goal-create':
+      if (backBtn) backBtn.classList.remove('hidden');
+      if (title) title.textContent = 'Create Goal';
+      highlightBottomNav('nav-goals');
+      break;
+    case 'goal-detail':
+      if (backBtn) backBtn.classList.remove('hidden');
+      if (title) title.textContent = 'Goal Strategy';
+      highlightBottomNav('nav-goals');
       break;
     case 'activity':
       if (backBtn) backBtn.classList.remove('hidden');
@@ -260,6 +296,19 @@ async function loadDatasetUsers() {
   }
 }
 
+async function loadGoals() {
+  try {
+    const res = await fetch('/api/goals');
+    if (res.ok) {
+      state.goals = await res.json();
+      renderHomeGoalsPreview();
+      renderGoalsDashboard();
+    }
+  } catch (err) {
+    console.warn('Goals fetch error:', err);
+  }
+}
+
 /**
  * Rendering: Home Dashboard
  */
@@ -285,6 +334,58 @@ function renderHomeProfile() {
 
   const commitmentsVal = document.getElementById('home-commitments-val');
   if (commitmentsVal) commitmentsVal.textContent = `${sym}${formatNum(p.upcoming_commitments)}`;
+}
+
+function renderHomeGoalsPreview() {
+  const container = document.getElementById('home-goals-preview-container');
+  if (!container) return;
+
+  if (!state.goals || state.goals.length === 0) {
+    container.innerHTML = `
+      <div class="p-4 rounded-2xl bg-surface-container-low border border-dashed border-outline-variant text-center space-y-2">
+        <p class="font-body-sm text-on-surface-variant">No goals created yet. Turn your next purchase into a behavior-aware plan.</p>
+        <button class="px-3.5 py-1.5 rounded-xl bg-primary text-on-primary font-label-sm font-semibold inline-flex items-center gap-1" onclick="navigateTo('goal-create')">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          <span>Set Financial Goal</span>
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  // Show top 2 active goals
+  const topGoals = state.goals.slice(0, 2);
+  container.innerHTML = topGoals.map(g => {
+    const pct = Math.min(100, Math.round((g.current_saved / g.target_amount) * 100));
+    const statusPill = getStatusPillHtml(g.status);
+    return `
+      <div class="p-3.5 rounded-2xl bg-surface-container-low border border-surface-container hover:border-primary/40 shadow-xs cursor-pointer active:scale-[0.99] transition-all" onclick="openGoalDetail('${g.goal_id}')">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+              <span class="material-symbols-outlined text-[18px]">${g.icon || 'flag'}</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-label-md text-label-md font-bold text-on-surface truncate">${g.name}</span>
+              <span class="font-body-sm text-[11px] text-on-surface-variant truncate">Target: ${formatDateReadable(g.target_date)}</span>
+            </div>
+          </div>
+          ${statusPill}
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="space-y-1">
+          <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+          </div>
+          <div class="flex justify-between items-center text-xs text-on-surface-variant">
+            <span><strong>${formatCurr(g.current_saved)}</strong> / ${formatCurr(g.target_amount)} (${pct}%)</span>
+            <span class="text-primary font-semibold">${formatCurr(g.monthly_contribution)}/mo</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function renderHomeTransactions() {
@@ -330,6 +431,605 @@ function renderHomeCommitments() {
       <span class="font-label-md text-label-md font-bold text-on-surface">${formatCurr(c.amount)}</span>
     </div>
   `).join('');
+}
+
+/**
+ * Rendering: Goals Dashboard & Accelerator
+ */
+function renderGoalsDashboard() {
+  const container = document.getElementById('goals-list-container');
+  if (!container) return;
+
+  // Calculate Aggregates
+  let totalSaved = 0;
+  let monthlyPace = 0;
+  (state.goals || []).forEach(g => {
+    totalSaved += Number(g.current_saved || 0);
+    monthlyPace += Number(g.monthly_contribution || 0);
+  });
+
+  const totalSavedEl = document.getElementById('goals-total-saved');
+  if (totalSavedEl) totalSavedEl.textContent = formatCurr(totalSaved);
+
+  const activeCountEl = document.getElementById('goals-active-count');
+  if (activeCountEl) activeCountEl.textContent = `${state.goals.length} ${state.goals.length === 1 ? 'Goal' : 'Goals'}`;
+
+  const monthlyPaceEl = document.getElementById('goals-monthly-pace');
+  if (monthlyPaceEl) monthlyPaceEl.textContent = formatCurr(monthlyPace);
+
+  if (state.goals.length === 0) {
+    container.innerHTML = `
+      <div class="p-8 text-center bg-surface-container-lowest rounded-2xl border border-surface-container space-y-3">
+        <span class="material-symbols-outlined text-4xl text-outline mb-1">flag</span>
+        <h3 class="font-headline-sm text-on-surface">No goals currently active</h3>
+        <p class="font-body-sm text-on-surface-variant max-w-[280px] mx-auto">Create your first financial target to get an intelligent, behavior-aware saving roadmap.</p>
+        <button class="px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-md font-semibold inline-flex items-center gap-1.5 shadow-sm" onclick="navigateTo('goal-create')">
+          <span class="material-symbols-outlined text-[18px]">add</span>
+          <span>Create New Goal</span>
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = state.goals.map(g => {
+    const pct = Math.min(100, Math.round((g.current_saved / g.target_amount) * 100));
+    const statusPill = getStatusPillHtml(g.status);
+    return `
+      <div class="p-4 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-xs space-y-3 hover:border-primary/50 transition-all cursor-pointer" onclick="openGoalDetail('${g.goal_id}')">
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[20px]">${g.icon || 'flag'}</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-headline-sm text-label-lg font-bold text-on-surface truncate">${g.name}</span>
+              <span class="font-body-sm text-xs text-on-surface-variant">${g.category || 'General'} · Target ${formatDateReadable(g.target_date)}</span>
+            </div>
+          </div>
+          ${statusPill}
+        </div>
+
+        <!-- Progress Bar and Numbers -->
+        <div class="space-y-1.5 pt-1">
+          <div class="flex justify-between items-baseline">
+            <div class="flex items-baseline gap-1">
+              <span class="font-headline-sm text-label-lg font-bold text-on-surface">${formatCurr(g.current_saved)}</span>
+              <span class="font-body-sm text-xs text-on-surface-variant">of ${formatCurr(g.target_amount)}</span>
+            </div>
+            <span class="font-label-md text-primary font-bold">${pct}% complete</span>
+          </div>
+          <div class="w-full h-2.5 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full bg-primary rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+          </div>
+        </div>
+
+        <!-- Telemetry & Action Footer -->
+        <div class="flex items-center justify-between pt-1 border-t border-surface-container-low text-xs text-on-surface-variant">
+          <div class="flex items-center gap-1 font-medium">
+            <span class="material-symbols-outlined text-[15px] text-primary">event_upcoming</span>
+            <span>Required: <strong class="text-on-surface">${formatCurr(g.monthly_contribution)}/mo</strong></span>
+          </div>
+          <span class="text-primary font-semibold flex items-center gap-0.5">
+            <span>Inspect Strategy</span>
+            <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+          </span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/**
+ * Goal Detail & Dynamic Adjustment Controller
+ */
+function openGoalDetail(goalId) {
+  state.currentGoalId = goalId;
+  const goal = (state.goals || []).find(g => g.goal_id === goalId) || state.goals[0];
+  if (!goal) return;
+  state.currentGoal = goal;
+
+  renderGoalDetailView(goal);
+  navigateTo('goal-detail');
+}
+
+async function renderGoalDetailView(goal) {
+  if (!goal) return;
+
+  // Header Elements
+  const titleEl = document.getElementById('goal-detail-title');
+  if (titleEl) titleEl.textContent = goal.name;
+
+  const categoryEl = document.getElementById('goal-detail-category');
+  if (categoryEl) categoryEl.textContent = `${goal.category || 'General'} · Target: ${formatDateReadable(goal.target_date)}`;
+
+  const iconEl = document.getElementById('goal-detail-icon');
+  if (iconEl) iconEl.textContent = goal.icon || 'flag';
+
+  const statusBadgeEl = document.getElementById('goal-detail-status-badge');
+  if (statusBadgeEl) {
+    if (goal.status === 'at_risk') {
+      statusBadgeEl.className = 'px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold uppercase tracking-wider';
+      statusBadgeEl.textContent = 'AT RISK';
+    } else if (goal.status === 'ahead') {
+      statusBadgeEl.className = 'px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold uppercase tracking-wider';
+      statusBadgeEl.textContent = 'AHEAD OF PACE';
+    } else {
+      statusBadgeEl.className = 'px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold uppercase tracking-wider';
+      statusBadgeEl.textContent = 'ON TRACK';
+    }
+  }
+
+  // Hero Stats
+  const savedEl = document.getElementById('goal-detail-saved');
+  if (savedEl) savedEl.textContent = formatCurr(goal.current_saved);
+
+  const targetEl = document.getElementById('goal-detail-target');
+  if (targetEl) targetEl.textContent = `of ${formatCurr(goal.target_amount)}`;
+
+  const pct = Math.min(100, Math.round((goal.current_saved / goal.target_amount) * 100));
+  const pctEl = document.getElementById('goal-detail-percent');
+  if (pctEl) pctEl.textContent = `${pct}%`;
+
+  const barEl = document.getElementById('goal-detail-progress-bar');
+  if (barEl) barEl.style.width = `${pct}%`;
+
+  const remainingAmt = Math.max(0, goal.target_amount - goal.current_saved);
+  const remainingTextEl = document.getElementById('goal-detail-remaining-text');
+  if (remainingTextEl) remainingTextEl.textContent = `${formatCurr(remainingAmt)} remaining`;
+
+  const reqPaceEl = document.getElementById('goal-detail-req-pace');
+  if (reqPaceEl) reqPaceEl.textContent = `${formatCurr(goal.monthly_contribution)} / mo`;
+
+  const curPaceEl = document.getElementById('goal-detail-current-pace');
+  if (curPaceEl) {
+    curPaceEl.textContent = `${formatCurr(goal.current_avg_contribution || goal.monthly_contribution)} / mo`;
+    if (goal.status === 'at_risk') {
+      curPaceEl.className = 'font-label-lg text-label-lg text-error font-bold mt-0.5';
+    } else {
+      curPaceEl.className = 'font-label-lg text-label-lg text-secondary font-bold mt-0.5';
+    }
+  }
+
+  // Fetch Dynamic Adjustment Recalculation from Backend
+  try {
+    const lagAmt = goal.status === 'at_risk' ? 1200.0 : 0.0;
+    const res = await fetch('/api/goals/adjust', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target_amount: goal.target_amount,
+        current_saved: goal.current_saved,
+        target_date: goal.target_date,
+        behind_amount: lagAmt,
+        current_pace: goal.current_avg_contribution || goal.monthly_contribution
+      })
+    });
+    if (res.ok) {
+      const adj = await res.json();
+      updateDynamicAdjustmentUI(adj, goal);
+    }
+  } catch (err) {
+    console.warn('Adjustment fetch error:', err);
+  }
+
+  // Fetch Educational Growth Scenarios
+  try {
+    const planRes = await fetch('/api/goals/calculate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target_amount: goal.target_amount,
+        current_saved: goal.current_saved,
+        target_date: goal.target_date
+      })
+    });
+    if (planRes.ok) {
+      const planData = await planRes.json();
+      renderEducationalScenarios(planData.growth_scenarios || []);
+    }
+  } catch (err) {
+    console.warn('Growth calculation error:', err);
+  }
+}
+
+function updateDynamicAdjustmentUI(adj, goal) {
+  const bannerEl = document.getElementById('dynamic-pace-banner');
+  const titleEl = document.getElementById('dynamic-pace-title');
+  const subEl = document.getElementById('dynamic-pace-sub');
+  const iconEl = document.getElementById('dynamic-pace-icon');
+
+  if (goal.status === 'at_risk') {
+    if (bannerEl) bannerEl.className = 'p-3 rounded-xl bg-tertiary-fixed/60 flex items-start gap-2.5';
+    if (iconEl) {
+      iconEl.className = 'material-symbols-outlined text-[20px] text-tertiary-fixed-variant mt-0.5 shrink-0';
+      iconEl.textContent = 'warning';
+    }
+    if (titleEl) titleEl.textContent = "You're currently ₹1,200 behind your planned pace.";
+    if (subEl) subEl.textContent = "Recent higher discretionary spends reduced monthly savings. Choose a calibrated course correction below:";
+  } else {
+    if (bannerEl) bannerEl.className = 'p-3 rounded-xl bg-secondary-container/50 flex items-start gap-2.5';
+    if (iconEl) {
+      iconEl.className = 'material-symbols-outlined text-[20px] text-secondary mt-0.5 shrink-0';
+      iconEl.textContent = 'check_circle';
+    }
+    if (titleEl) titleEl.textContent = "Your goal pace is healthy & on schedule.";
+    if (subEl) subEl.textContent = "You're saving safely without risking your ₹5,000 emergency shield or essential commitments.";
+  }
+
+  // Option 1 Elements
+  const opt1Title = document.getElementById('opt-increase-title');
+  if (opt1Title && adj.option_increase_monthly) opt1Title.textContent = adj.option_increase_monthly.title;
+
+  const opt1Diff = document.getElementById('opt-increase-diff');
+  if (opt1Diff && adj.option_increase_monthly) opt1Diff.textContent = adj.option_increase_monthly.diff;
+
+  // Option 2 Elements
+  const opt2Title = document.getElementById('opt-extend-title');
+  if (opt2Title && adj.option_extend_date) opt2Title.textContent = adj.option_extend_date.title;
+
+  const opt2Diff = document.getElementById('opt-extend-diff');
+  if (opt2Diff && adj.option_extend_date) opt2Diff.textContent = adj.option_extend_date.diff;
+}
+
+function renderEducationalScenarios(scenarios) {
+  const container = document.getElementById('goal-scenarios-container');
+  if (!container) return;
+
+  container.innerHTML = scenarios.map(s => `
+    <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container hover:border-primary/40 transition-all space-y-2">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+            <span class="material-symbols-outlined text-[18px]">${s.icon || 'trending_up'}</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-label-md text-label-md font-bold text-on-surface truncate">${s.name}</span>
+            <span class="font-body-sm text-[11px] text-on-surface-variant">Assumed: ${s.assumed_annual_rate} p.a. · Risk: ${s.risk_level}</span>
+          </div>
+        </div>
+        <span class="px-2 py-0.5 rounded-full ${s.timeline_fit === 'Best fit' ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-container text-on-surface-variant'} text-[11px] font-bold">
+          ${s.timeline_fit}
+        </span>
+      </div>
+
+      <p class="text-xs text-on-surface-variant leading-relaxed">${s.desc}</p>
+
+      <div class="grid grid-cols-2 gap-2 pt-1 border-t border-surface-container-highest text-xs">
+        <div>
+          <span class="text-on-surface-variant">Monthly Contribution:</span>
+          <p class="font-label-md font-bold text-primary">${formatCurr(s.monthly_contribution)}/mo</p>
+        </div>
+        <div>
+          <span class="text-on-surface-variant">Estimated Compounded Gain:</span>
+          <p class="font-label-md font-bold text-secondary">+${formatCurr(s.estimated_gain)}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/**
+ * Live Goal Creation Controller
+ */
+async function triggerLiveGoalCalculation() {
+  const nameInput = document.getElementById('new-goal-name');
+  const amountInput = document.getElementById('new-goal-amount');
+  const dateInput = document.getElementById('new-goal-date');
+  const savedInput = document.getElementById('new-goal-saved');
+
+  const name = nameInput ? nameInput.value.trim() || 'New Goal' : 'New Goal';
+  const amount = amountInput ? parseFloat(amountInput.value) || 50000 : 50000;
+  const targetDate = dateInput ? dateInput.value || '2027-06-30' : '2027-06-30';
+  const currentSaved = savedInput ? parseFloat(savedInput.value) || 0 : 0;
+
+  try {
+    const res = await fetch('/api/goals/calculate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target_amount: amount,
+        current_saved: currentSaved,
+        target_date: targetDate
+      })
+    });
+
+    if (res.ok) {
+      const plan = await res.json();
+      state.livePlanCalculation = plan;
+
+      // Update Breakdown Tiles
+      const dailyEl = document.getElementById('create-plan-daily');
+      if (dailyEl) dailyEl.textContent = `${formatCurr(plan.required_daily)} / day`;
+
+      const weeklyEl = document.getElementById('create-plan-weekly');
+      if (weeklyEl) weeklyEl.textContent = `${formatCurr(plan.required_weekly)} / wk`;
+
+      const monthlyEl = document.getElementById('create-plan-monthly');
+      if (monthlyEl) monthlyEl.textContent = `${formatCurr(plan.required_monthly)} / mo`;
+
+      // Update Feasibility Badges
+      const badgeEl = document.getElementById('create-feasibility-badge');
+      if (badgeEl) {
+        badgeEl.textContent = plan.feasibility_badge;
+        if (plan.feasibility === 'comfortable') {
+          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold';
+        } else if (plan.feasibility === 'moderate') {
+          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-bold';
+        } else {
+          badgeEl.className = 'px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold';
+        }
+      }
+
+      const headEl = document.getElementById('create-feasibility-headline');
+      if (headEl) headEl.textContent = plan.feasibility_headline;
+
+      const subEl = document.getElementById('create-feasibility-sub');
+      if (subEl) subEl.textContent = plan.feasibility_sub;
+
+      // Render 3 Plans
+      renderCreatePlans(plan.plans || []);
+    }
+  } catch (err) {
+    console.warn('Live calculation error:', err);
+  }
+}
+
+function renderCreatePlans(plans) {
+  const container = document.getElementById('create-plans-container');
+  if (!container) return;
+
+  container.innerHTML = plans.map((p, idx) => `
+    <div class="p-3 rounded-xl bg-surface-container-low border ${p.is_recommended ? 'border-primary bg-primary/5' : 'border-outline-variant/30'} flex items-start justify-between gap-2 cursor-pointer transition-all">
+      <div class="flex flex-col min-w-0">
+        <div class="flex items-center gap-1.5">
+          <span class="font-label-sm font-bold text-on-surface">${p.name}</span>
+          <span class="px-1.5 py-0.2 rounded text-[10px] font-bold ${p.is_recommended ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'}">${p.badge}</span>
+        </div>
+        <p class="text-xs text-on-surface-variant mt-0.5">${p.desc}</p>
+      </div>
+      <div class="text-right shrink-0">
+        <span class="font-label-md font-bold text-primary">${formatCurr(p.monthly_amount)}/mo</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setGoalTemplate(name, amount, months, category) {
+  const nameEl = document.getElementById('new-goal-name');
+  if (nameEl) nameEl.value = name;
+
+  const amtEl = document.getElementById('new-goal-amount');
+  if (amtEl) amtEl.value = amount;
+
+  const savedEl = document.getElementById('new-goal-saved');
+  if (savedEl) savedEl.value = 0;
+
+  const dateEl = document.getElementById('new-goal-date');
+  if (dateEl) {
+    const d = new Date();
+    d.setMonth(d.getMonth() + months);
+    dateEl.value = d.toISOString().split('T')[0];
+  }
+
+  state.selectedGoalCategory = category;
+  const pills = document.querySelectorAll('#new-goal-category-container button');
+  pills.forEach(btn => {
+    if (btn.textContent.trim().toLowerCase() === category.toLowerCase()) {
+      btn.className = 'px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-xs flex-shrink-0';
+    } else {
+      btn.className = 'px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex-shrink-0';
+    }
+  });
+
+  triggerLiveGoalCalculation();
+  showToast(`Loaded template for ${name}`);
+}
+
+function selectGoalCategory(category, btnEl) {
+  state.selectedGoalCategory = category;
+  const pills = document.querySelectorAll('#new-goal-category-container button');
+  pills.forEach(b => {
+    b.className = 'px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex-shrink-0';
+  });
+  if (btnEl) {
+    btnEl.className = 'px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-xs flex-shrink-0';
+  }
+}
+
+async function submitCreateGoal() {
+  const nameInput = document.getElementById('new-goal-name');
+  const amountInput = document.getElementById('new-goal-amount');
+  const dateInput = document.getElementById('new-goal-date');
+  const savedInput = document.getElementById('new-goal-saved');
+
+  const name = nameInput ? nameInput.value.trim() || 'My Financial Goal' : 'My Financial Goal';
+  const amount = amountInput ? parseFloat(amountInput.value) || 50000 : 50000;
+  const targetDate = dateInput ? dateInput.value || '2027-06-30' : '2027-06-30';
+  const saved = savedInput ? parseFloat(savedInput.value) || 0 : 0;
+
+  const monthlyPace = state.livePlanCalculation ? state.livePlanCalculation.required_monthly : Math.round(amount / 12);
+
+  const iconMap = {
+    'Device': 'laptop_mac',
+    'Emergency': 'shield',
+    'Travel': 'flight',
+    'Education': 'school',
+    'Vehicle': 'directions_car',
+    'Other': 'flag'
+  };
+
+  const payload = {
+    name: name,
+    category: state.selectedGoalCategory || 'Device',
+    target_amount: amount,
+    current_saved: saved,
+    target_date: targetDate,
+    monthly_contribution: monthlyPace,
+    current_avg_contribution: monthlyPace,
+    status: 'on_track',
+    icon: iconMap[state.selectedGoalCategory] || 'flag'
+  };
+
+  try {
+    const res = await fetch('/api/goals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      await loadGoals();
+      showToast(`Goal "${name}" created successfully!`);
+      if (data.goal && data.goal.goal_id) {
+        openGoalDetail(data.goal.goal_id);
+      } else {
+        navigateTo('goals');
+      }
+    }
+  } catch (err) {
+    console.error('Goal creation failed:', err);
+    showToast('Goal creation failed. Please check inputs.');
+  }
+}
+
+/**
+ * Dynamic Adjustment Action Handlers & Simulations
+ */
+async function simulateGoalBehavior(status, lagAmount) {
+  if (!state.currentGoalId) return;
+  try {
+    const res = await fetch('/api/goals/simulate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        goal_id: state.currentGoalId,
+        status: status,
+        lag_amount: lagAmount
+      })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      state.currentGoal = data.goal;
+      // Update goal in local state
+      const idx = state.goals.findIndex(g => g.goal_id === state.currentGoalId);
+      if (idx !== -1) state.goals[idx] = data.goal;
+
+      await renderGoalDetailView(data.goal);
+      renderHomeGoalsPreview();
+      renderGoalsDashboard();
+      showToast(status === 'at_risk' ? 'Simulated: Behind pace by ₹1,200.' : 'Simulated: On track with planned pace.');
+    }
+  } catch (err) {
+    console.warn('Simulation error:', err);
+  }
+}
+
+async function applyGoalAdjustment(actionType) {
+  if (!state.currentGoal) return;
+  const goal = state.currentGoal;
+
+  if (actionType === 'increase_pace') {
+    // Increase monthly pace to ₹4,650
+    const newPace = Math.round(goal.monthly_contribution * 1.12);
+    goal.monthly_contribution = newPace;
+    goal.current_avg_contribution = newPace;
+    goal.status = 'on_track';
+    showToast(`Applied new target pace of ${formatCurr(newPace)}/month.`);
+  } else if (actionType === 'extend_date') {
+    // Extend target date by 18 days
+    const d = new Date(goal.target_date);
+    d.setDate(d.getDate() + 18);
+    goal.target_date = d.toISOString().split('T')[0];
+    goal.status = 'on_track';
+    showToast(`Extended target date to ${formatDateReadable(goal.target_date)}.`);
+  } else if (actionType === 'trim_spending') {
+    goal.status = 'on_track';
+    showToast('Committed ₹400/month spending trim. Goal returned to ON TRACK.');
+  }
+
+  // Update backend
+  try {
+    await fetch('/api/goals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(goal)
+    });
+    await loadGoals();
+    renderGoalDetailView(goal);
+  } catch (err) {
+    console.warn('Update goal error:', err);
+  }
+}
+
+function updateInteractiveGrowthScenario(customRate) {
+  const rateLabel = document.getElementById('slider-rate-label');
+  if (rateLabel) rateLabel.textContent = `${Number(customRate).toFixed(1)}% p.a.`;
+
+  if (!state.currentGoal) return;
+  const goal = state.currentGoal;
+  const remaining = Math.max(0, goal.target_amount - goal.current_saved);
+  const months = 12.0;
+
+  const r = parseFloat(customRate) / 100.0;
+  const i = r / 12.0;
+  let factor = (((1.0 + i) ** months - 1.0) / i) * (1.0 + i);
+  let monthly = remaining / (factor > 0 ? factor : months);
+
+  const calcEl = document.getElementById('slider-calculated-monthly');
+  if (calcEl) calcEl.textContent = `${formatCurr(Math.round(monthly))} / month`;
+}
+
+function exportSingleGoalData() {
+  if (!state.currentGoal) return;
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state.currentGoal, null, 2));
+  const dlAnchor = document.createElement('a');
+  dlAnchor.setAttribute("href", dataStr);
+  dlAnchor.setAttribute("download", `goal_${state.currentGoal.goal_id}.json`);
+  document.body.appendChild(dlAnchor);
+  dlAnchor.click();
+  dlAnchor.remove();
+  showToast('Goal data exported.');
+}
+
+async function deleteCurrentGoal() {
+  if (!state.currentGoalId) return;
+  if (confirm('Delete this goal and remove from tracking?')) {
+    try {
+      const res = await fetch(`/api/goals?goal_id=${state.currentGoalId}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        await loadGoals();
+        showToast('Goal deleted.');
+        navigateTo('goals');
+      }
+    } catch (err) {
+      console.warn('Delete goal error:', err);
+    }
+  }
+}
+
+function getStatusPillHtml(status) {
+  if (status === 'at_risk') {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-[11px] font-bold tracking-wide uppercase">AT RISK</span>`;
+  } else if (status === 'ahead') {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">AHEAD</span>`;
+  } else {
+    return `<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold tracking-wide uppercase">ON TRACK</span>`;
+  }
+}
+
+function formatDateReadable(dateStr) {
+  if (!dateStr) return 'Target Date';
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch (e) {
+    return dateStr;
+  }
 }
 
 /**
